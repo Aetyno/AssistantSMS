@@ -1,0 +1,49 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="806" measuredH="664" mockupW="282" mockupH="596">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::iPhone" x="524" y="68" w="282" h="596" measuredW="282" measuredH="510" zOrder="0" locked="false" isInGroup="-1"/>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::Canvas" x="550" y="209" w="227" h="42" measuredW="100" measuredH="70" zOrder="1" locked="false" isInGroup="-1"/>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::Image" x="704" y="214" w="-1" h="-1" measuredW="32" measuredH="32" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>AssistantSMS%20-%20CreateSMS%26bm%3BAssistantSMS%20-%20CreateSMS.bmml%26bm%3BAssistantSMS%20-%20CreateSMS.bmml%26bm%3BAssistantSMS%20-%20CreateSMS.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22180%2C146%2C212%2C178%22%20href%3D%22AssistantSMS%2520-%2520CreateSMS.bmml%22%20alt%3D%22AssistantSMS%20-%20CreateSMS%22%20id%3D%223%22/%3E</map>
+        <src>./assets/5_content_new_email.png</src>
+      </controlProperties>
+    </control>
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::Canvas" x="751" y="220" w="10" h="21" measuredW="100" measuredH="70" zOrder="3" locked="false" isInGroup="-1"/>
+    <control controlID="7" controlTypeID="com.balsamiq.mockups::HRule" x="556" y="329" w="221" h="-1" measuredW="100" measuredH="10" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>13421772</color>
+      </controlProperties>
+    </control>
+    <control controlID="8" controlTypeID="com.balsamiq.mockups::Label" x="557" y="256" w="-1" h="-1" measuredW="142" measuredH="21" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>A%20%3A%20Jean%2C%200645789525</text>
+      </controlProperties>
+    </control>
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::Label" x="557" y="273" w="146" h="14" measuredW="146" measuredH="21" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Le%20%3A%2014/10/2012%20%20%2012h30</text>
+      </controlProperties>
+    </control>
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::Label" x="557" y="289" w="-1" h="-1" measuredW="96" measuredH="21" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Ou%20%3A%20Rochegude</text>
+      </controlProperties>
+    </control>
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::Label" x="566" y="308" w="-1" h="-1" measuredW="198" measuredH="21" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Salut%20tous%20le%20monde%2C%20je%20suis%20bien....</text>
+      </controlProperties>
+    </control>
+    <control controlID="12" controlTypeID="com.balsamiq.mockups::RoundButton" x="561" y="214" w="-1" h="-1" measuredW="32" measuredH="32" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="13" controlTypeID="com.balsamiq.mockups::Label" x="595" y="220" w="-1" h="-1" measuredW="83" measuredH="21" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>AssistantSMS</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
