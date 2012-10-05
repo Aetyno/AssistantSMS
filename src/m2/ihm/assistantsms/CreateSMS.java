@@ -70,12 +70,12 @@ public class CreateSMS extends FragmentActivity {
     }
     
     public void showTimePickerDialog(View v) {
-        DialogFragment newFragment = new TimePickerFragment();
+    	DialogFragment newFragment = new TimePickerFragment();
         newFragment.show(getSupportFragmentManager(), "timePicker");
     }
     
     public void showDatePickerDialog(View v) {
-        //DialogFragment newFragment = new DatePickerFragment();
-        //newFragment.show(getSupportFragmentManager(), "datePicker");
+    	DialogFragment newFragment = new DatePickerFragment();
+        newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 }
