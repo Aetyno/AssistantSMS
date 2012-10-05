@@ -27,6 +27,8 @@
     <control controlID="14" controlTypeID="com.balsamiq.mockups::Switch" x="704" y="332" w="-1" h="-1" measuredW="68" measuredH="28" zOrder="8" locked="false" isInGroup="-1"/>
     <control controlID="17" controlTypeID="com.balsamiq.mockups::Image" x="541" y="214" w="-1" h="-1" measuredW="32" measuredH="32" zOrder="9" locked="false" isInGroup="-1">
       <controlProperties>
+        <href>AssistantSMS%20-%20Main_empty%26bm%3BAssistantSMS%20-%20Main_empty.bmml%26bm%3BAssistantSMS%20-%20Main_empty.bmml%26bm%3BAssistantSMS%20-%20Main_empty.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2217%2C146%2C49%2C178%22%20href%3D%22AssistantSMS%2520-%2520Main_empty.bmml%22%20alt%3D%22AssistantSMS%20-%20Main_empty%22%20id%3D%2217%22/%3E</map>
         <src>./assets/1_navigation_previous_item.png</src>
       </controlProperties>
     </control>
