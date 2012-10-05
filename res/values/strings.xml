@@ -7,11 +7,11 @@
     <string name="menu_history">Historique</string>
     <string name="menu_history_geo">Historique geographique</string>
     <string name="menu_about">A propos</string>
-    <string name="title_activity_history">History</string>
-    <string name="title_activity_history_geo">HistoryGeo</string>
-    <string name="title_activity_create_sms">CreateSMS</string>
-    <string name="title_activity_modify_sms">ModifySMS</string>
-    <string name="title_activity_about">About</string>
-    <string name="title_activity_setting">Setting</string>
+    <string name="title_activity_history">Historique</string>
+    <string name="title_activity_history_geo">Historique géographique</string>
+    <string name="title_activity_create_sms">Nouvel SMS</string>
+    <string name="title_activity_modify_sms">Modification</string>
+    <string name="title_activity_about">A propos</string>
+    <string name="title_activity_setting">Paramètre</string>
 
 </resources>
