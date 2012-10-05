@@ -13,5 +13,11 @@
     <string name="title_activity_modify_sms">Modification</string>
     <string name="title_activity_about">A propos</string>
     <string name="title_activity_setting">Paramètre</string>
+    <string name="receiver">Destinataire(s)</string>
+    <string name="contact">Contact</string>
+    <string name="map">Carte</string>
+    <string name="calendar">Calendrier</string>
+    <string name="message">Message</string>
+    <string name="send">Condition</string>
 
 </resources>

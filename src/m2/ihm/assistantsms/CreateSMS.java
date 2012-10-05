@@ -1,12 +1,15 @@
 package m2.ihm.assistantsms;
 
 import android.os.Bundle;
-import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.CheckBox;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentActivity;
 
-public class CreateSMS extends Activity {
+public class CreateSMS extends FragmentActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,8 +35,8 @@ public class CreateSMS extends Activity {
                 return true;
             case R.id.menu_accept:
             	intent = new Intent(this, Main.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                //startActivity(intent);
+                //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
             	return true;
             case R.id.menu_cancel:
             	intent = new Intent(this, Main.class);
@@ -43,5 +46,36 @@ public class CreateSMS extends Activity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+    
+    public void test(View view){
+    	Intent intent = new Intent(this, Main.class);
+        //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+    
+    public void onCheckboxClicked(View view){
+    	boolean checked = ((CheckBox) view).isChecked();
+    	switch(view.getId()){
+    		case R.id.checkbox_map:
+    			if(checked){
+    			}
+    			else{
+    				
+    			}
+    			break;
+    		case R.id.checkbox_time:
+    			break;
+    	}
+    }
+    
+    public void showTimePickerDialog(View v) {
+        DialogFragment newFragment = new TimePickerFragment();
+        newFragment.show(getSupportFragmentManager(), "timePicker");
+    }
+    
+    public void showDatePickerDialog(View v) {
+        //DialogFragment newFragment = new DatePickerFragment();
+        //newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 }
