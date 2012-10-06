@@ -75,7 +75,7 @@ public class CreateSMS extends FragmentActivity {
     }
     
     public void showDatePickerDialog(View v) {
-        //DialogFragment newFragment = new DatePickerFragment();
-        //newFragment.show(getSupportFragmentManager(), "datePicker");
+        DialogFragment newFragment = new DatePickerFragment();
+        newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 }
