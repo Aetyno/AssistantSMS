@@ -6,9 +6,9 @@ import java.util.List;
 
 public class AssistantSMS {
 	
-	static List <SMS> listeSMS = new ArrayList<SMS>();
+	static List <SMS> listeSMS = initSMS();
 	
-	List <SMS> historique = new ArrayList<SMS>();
+	static List <SMS> historique = initHistory();
 
 	private Parametre parametre;
 	
@@ -18,7 +18,8 @@ public class AssistantSMS {
 	 * Initialise une liste de SMS
 	 * @return une liste de "SMS"
 	 */
-	public static List<SMS> getAListOfSMS() {
+	public static List<SMS> initSMS() {
+		listeSMS = new ArrayList<SMS>();
 		SMS sms = new SMS();
 		sms.setDestinataire("03003030");
 		sms.setLocalisation("Toutlouse");
@@ -35,16 +36,33 @@ public class AssistantSMS {
 		
 		return listeSMS;
 	}	
-	
+	public static List<SMS> initHistory() {
+		historique = new ArrayList<SMS>();
+		SMS sms = new SMS();
+		sms.setDestinataire("03003030");
+		sms.setLocalisation("Toutlouse");
+		sms.setSms("coucou sa va bien");
+		sms.setDate(new Date()) ;
+		historique.add(sms);
+		sms = new SMS();
+		sms.setDestinataire("077770");
+		sms.setLocalisation("sedan");
+		sms.setSms("hello a+");
+		sms.setDate(new Date()) ;
+		historique.add(sms);
+		
+		
+		return historique;
+	}
 	public APropo getApropo() {
 		return apropo;
 	}
 
-	public List<SMS> getListeSMS() {
+	public static List<SMS> getListeSMS() {
 		return listeSMS;
 	}
 
-	public List<SMS> getHistorique() {
+	public  static List<SMS> getHistorique() {
 		return historique;
 	}
 

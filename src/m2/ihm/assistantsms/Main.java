@@ -17,7 +17,7 @@ public class Main extends ListActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        List<SMS> listSMS = AssistantSMS.getAListOfSMS();
+        List<SMS> listSMS = AssistantSMS.getListeSMS();
         SMSAdapter adapter = new SMSAdapter(this, listSMS);
         setListAdapter(adapter);
     }
