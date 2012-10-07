@@ -1,22 +1,22 @@
 package m2.ihm.assistantsms.model;
 
-import java.util.Calendar;
+import java.util.Date;
 
 public class SMS {
 
 
 	private String destinataire;
 	
-	private Calendar date;
+	private Date date;
 	
 	private String localisation;
 	
 	private String sms;
-	
-	public Calendar getDate() {
+
+	public Date getDate() {
 		return date;
 	}
-	public void setDate(Calendar date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 	public String getLocalisation() {
