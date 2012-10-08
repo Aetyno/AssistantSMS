@@ -19,5 +19,9 @@
     <string name="calendar">Calendrier</string>
     <string name="message">Message</string>
     <string name="send">Condition</string>
+    <string name="sms">texte: </string>
+    <string name="lieu">Ou: </string>
+    <string name="date">Quand: </string>
+    <string name="destinataire">A: </string>
 
 </resources>

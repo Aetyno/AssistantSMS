@@ -1,5 +1,9 @@
 package m2.ihm.assistantsms;
 
+import java.util.Date;
+
+import m2.ihm.assistantsms.model.AssistantSMS;
+import m2.ihm.assistantsms.model.SMS;
 import android.os.Bundle;
 import android.content.Intent;
 import android.view.Menu;
@@ -34,6 +38,14 @@ public class CreateSMS extends FragmentActivity {
                 //startActivity(intent);
                 return true;
             case R.id.menu_accept:
+            	SMS sms = new SMS();
+            	sms.setDestinataire("tes");
+            	sms.setDate(new Date());
+            	sms.setLocalisation("localisation");
+            	sms.setSms("sms");
+            	
+            	AssistantSMS.getListeSMS().add(sms);
+            	
             	intent = new Intent(this, Main.class);
                 //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
@@ -70,12 +82,12 @@ public class CreateSMS extends FragmentActivity {
     }
     
     public void showTimePickerDialog(View v) {
-    	DialogFragment newFragment = new TimePickerFragment();
+        DialogFragment newFragment = new TimePickerFragment();
         newFragment.show(getSupportFragmentManager(), "timePicker");
     }
     
     public void showDatePickerDialog(View v) {
-    	DialogFragment newFragment = new DatePickerFragment();
+        DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 }

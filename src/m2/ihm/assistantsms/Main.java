@@ -1,17 +1,26 @@
 package m2.ihm.assistantsms;
 
+import java.util.List;
+
+import m2.ihm.assistantsms.adapter.SMSAdapter;
+import m2.ihm.assistantsms.model.AssistantSMS;
+import m2.ihm.assistantsms.model.SMS;
 import android.os.Bundle;
-import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class Main extends Activity {
-
+public class Main extends ListActivity {
+	private List<SMS> listeSMS;
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        
+        listeSMS = AssistantSMS.getListeSMS();
+        SMSAdapter adapter = new SMSAdapter(this, listeSMS);
+        setListAdapter(adapter);
     }
 
     @Override
@@ -50,4 +59,5 @@ public class Main extends Activity {
                 return super.onOptionsItemSelected(item);
         }
     }
+    
 }

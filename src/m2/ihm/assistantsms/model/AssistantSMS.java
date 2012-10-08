@@ -3,31 +3,42 @@ package m2.ihm.assistantsms.model;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class AssistantSMS {
 	
-	List <SMS> listeSMS = new ArrayList<SMS>();
+	private static List <SMS> listeSMS;// = initSMS();
 	
-	List <SMS> historique = new ArrayList<SMS>();
+	private static List <SMS> listeHistorique;// = initHistory();
 
-	private Parametre parametre;
+	//private Parametre parametre;
 	
-	private APropo apropo;
+	//private APropo apropo;
 	
-	public APropo getApropo() {
-		return apropo;
+	/**
+	 * Initialise une liste de SMS
+	 * @return une liste de "SMS"
+	 */
+	
+	private AssistantSMS(){
+		listeSMS = null;
+		/*Récupération valeurs enregistrées*/
+		listeHistorique = null;
+		/*Récupération valeurs enregistrées*/
 	}
-
-	public List<SMS> getListeSMS() {
+	
+	public static List<SMS> getListeSMS(){
+		if(listeSMS == null){
+			listeSMS = new ArrayList<SMS>();
+		}
+		
 		return listeSMS;
 	}
-
-	public List<SMS> getHistorique() {
-		return historique;
-	}
-
-	public Parametre getParametre() {
-		return parametre;
-	}
 	
-	
+	public static List<SMS> getListeHistorique(){
+		if(listeHistorique == null){
+			listeHistorique = new ArrayList<SMS>();
+		}
+		
+		return listeHistorique;
+	}
 }
