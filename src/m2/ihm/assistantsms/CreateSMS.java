@@ -2,8 +2,12 @@ package m2.ihm.assistantsms;
 
 import java.util.Date;
 
-import m2.ihm.assistantsms.model.AssistantSMS;
-import m2.ihm.assistantsms.model.SMS;
+import m2.ihm.assistantsms.model.Model;
+import m2.ihm.assistantsms.model.Singleton;
+
+import resources.DatePickerFragment;
+import resources.TimePickerFragment;
+
 import android.os.Bundle;
 import android.content.Intent;
 import android.view.Menu;
@@ -14,7 +18,9 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 
 public class CreateSMS extends FragmentActivity {
-
+	private DialogFragment newFragment1;
+	private DialogFragment newFragment2;
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,14 +44,8 @@ public class CreateSMS extends FragmentActivity {
                 //startActivity(intent);
                 return true;
             case R.id.menu_accept:
-            	SMS sms = new SMS();
-            	sms.setDestinataire("tes");
-            	sms.setDate(new Date());
-            	sms.setLocalisation("localisation");
-            	sms.setSms("sms");
-            	
-            	AssistantSMS.getListeSMS().add(sms);
-            	
+            	((Model) Singleton.getModel()).addSMSListeSMS("Destinaire", new Date(), "localisation", "sms");
+      
             	intent = new Intent(this, Main.class);
                 //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
@@ -82,12 +82,12 @@ public class CreateSMS extends FragmentActivity {
     }
     
     public void showTimePickerDialog(View v) {
-        DialogFragment newFragment = new TimePickerFragment();
-        newFragment.show(getSupportFragmentManager(), "timePicker");
+        newFragment1 = new TimePickerFragment();
+        newFragment1.show(getSupportFragmentManager(), "timePicker");
     }
     
     public void showDatePickerDialog(View v) {
-        DialogFragment newFragment = new DatePickerFragment();
-        newFragment.show(getSupportFragmentManager(), "datePicker");
+        newFragment2 = new DatePickerFragment();
+        newFragment2.show(getSupportFragmentManager(), "datePicker");
     }
 }

@@ -1,4 +1,4 @@
-package m2.ihm.assistantsms;
+package resources;
 
 import java.util.Calendar;
 

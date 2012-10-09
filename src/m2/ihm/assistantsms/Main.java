@@ -2,9 +2,10 @@ package m2.ihm.assistantsms;
 
 import java.util.List;
 
+import resources.SMS;
+
 import m2.ihm.assistantsms.adapter.SMSAdapter;
-import m2.ihm.assistantsms.model.AssistantSMS;
-import m2.ihm.assistantsms.model.SMS;
+import m2.ihm.assistantsms.model.Singleton;
 import android.os.Bundle;
 import android.app.ListActivity;
 import android.content.Intent;
@@ -18,7 +19,7 @@ public class Main extends ListActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        listeSMS = AssistantSMS.getListeSMS();
+        listeSMS = Singleton.getModel().getListeSMS();
         SMSAdapter adapter = new SMSAdapter(this, listeSMS);
         setListAdapter(adapter);
     }

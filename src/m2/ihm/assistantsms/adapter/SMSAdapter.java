@@ -2,8 +2,9 @@ package m2.ihm.assistantsms.adapter;
 
 import java.util.List;
 
+import resources.SMS;
+
 import m2.ihm.assistantsms.R;
-import m2.ihm.assistantsms.model.SMS;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -27,22 +28,18 @@ public class SMSAdapter extends BaseAdapter  {
 		  this.inflater = LayoutInflater.from(this.context);
 	}
 	
-	@Override
 	public int getCount() {
 		return this.listSMS.size();
 	}
 
-	@Override
 	public Object getItem(int position) {
 		return this.listSMS.get(position);
 	}
 
-	@Override
 	public long getItemId(int position) {
 		return position;
 	}
 
-	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		// TODO Auto-generated method stub
 		 LinearLayout layoutItem;
