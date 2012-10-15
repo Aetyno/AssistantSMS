@@ -11,6 +11,7 @@ import resources.TimePickerFragment;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.view.Menu;
@@ -20,6 +21,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
+import android.widget.Toast;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 
@@ -56,6 +58,7 @@ public class CreateSMS extends FragmentActivity implements OnClickListener{
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent intent;
+        Toast toast;
     	switch (item.getItemId()) {
             case android.R.id.home:
                 // app icon in action bar clicked; go home
@@ -63,18 +66,28 @@ public class CreateSMS extends FragmentActivity implements OnClickListener{
                 //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 //startActivity(intent);
                 return true;
+                
             case R.id.menu_accept:
             	((Model) Singleton.getModel()).addSMSListeSMS("Destinaire", new Date(), "localisation", "sms");
       
+            	toast = Toast.makeText(getApplicationContext(), "Message enregistré", Toast.LENGTH_SHORT);
+            	toast.show();
+            	
             	intent = new Intent(this, Main.class);
                 //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             	return true;
+            	
             case R.id.menu_cancel:
+
+            	toast = Toast.makeText(getApplicationContext(), "Annulation", Toast.LENGTH_SHORT);
+            	toast.show();
+            	
             	intent = new Intent(this, Main.class);
                 //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             	return true;
+            	
             default:
                 return super.onOptionsItemSelected(item);
         }
