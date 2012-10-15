@@ -57,7 +57,7 @@ public class SMSAdapter extends BaseAdapter  {
 		  destinataire.setText(listSMS.get(position).getDestinataire());
 		  date.setText(listSMS.get(position).getDate().toString());
 		  localisation.setText(listSMS.get(position).getLocalisation());
-		  sms.setText(listSMS.get(position).getSms());
+		  sms.setText(listSMS.get(position).getMessage());
 		  
 		  return layoutItem;
 	}

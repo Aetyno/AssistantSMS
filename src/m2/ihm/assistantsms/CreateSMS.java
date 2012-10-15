@@ -4,8 +4,10 @@ import java.util.Date;
 
 import m2.ihm.assistantsms.model.Model;
 import m2.ihm.assistantsms.model.Singleton;
+import m2.ihm.assistantsms.base_de_donnees.MaBaseGestion;
 
 import resources.DatePickerFragment;
+import resources.SMS;
 import resources.TimePickerFragment;
 
 import android.net.Uri;
@@ -30,6 +32,8 @@ public class CreateSMS extends FragmentActivity implements OnClickListener{
 	private DialogFragment newFragment2;
 	private ImageButton buttonContact = null;
 
+	private MaBaseGestion  maBaseGestion= new MaBaseGestion(this);
+	
     @SuppressWarnings("unused")
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,7 +72,11 @@ public class CreateSMS extends FragmentActivity implements OnClickListener{
                 return true;
                 
             case R.id.menu_accept:
-            	((Model) Singleton.getModel()).addSMSListeSMS("Destinaire", new Date(), "localisation", "sms");
+            	maBaseGestion.open();
+            	maBaseGestion.insertSMS(new SMS("Destinaire", new Date(), "localisation", "sms"));
+            	maBaseGestion.close();
+            	
+            	//((Model) Singleton.getModel()).addSMSListeSMS("Destinaire", new Date(), "localisation", "sms");
       
             	toast = Toast.makeText(getApplicationContext(), "Message enregistré", Toast.LENGTH_SHORT);
             	toast.show();

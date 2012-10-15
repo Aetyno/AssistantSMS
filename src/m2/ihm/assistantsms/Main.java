@@ -5,6 +5,7 @@ import java.util.List;
 import resources.SMS;
 
 import m2.ihm.assistantsms.adapter.SMSAdapter;
+import m2.ihm.assistantsms.base_de_donnees.MaBaseGestion;
 import m2.ihm.assistantsms.model.Singleton;
 import android.os.Bundle;
 import android.app.ListActivity;
@@ -19,8 +20,11 @@ public class Main extends ListActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MaBaseGestion maBaseGestion = new MaBaseGestion(this);
         
-        listeSMS = Singleton.getModel().getListeSMS();
+        maBaseGestion.open();
+        listeSMS = maBaseGestion.getAllSMS();//Singleton.getModel().getListeSMS();
+        maBaseGestion.close();
         SMSAdapter adapter = new SMSAdapter(this, listeSMS);
         setListAdapter(adapter);
     }
