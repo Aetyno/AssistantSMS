@@ -20,8 +20,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/contact"
-            android:onClick="test"
-            android:src="@drawable/ic_social_add_person" />
+            android:onClick="doLaunchContactPicker"
+            android:src="@drawable/ic_social_add_person"  />
         <EditText
             android:id="@+id/editText2"
             android:layout_width="wrap_content"
@@ -51,22 +51,21 @@
             android:src="@drawable/ic_collections_go_to_today" />
 
         <Button
-            android:id="@+id/picker_time" 
+            android:id="@+id/picker_date" 
     		android:layout_width="wrap_content" 
 		    android:layout_height="wrap_content"
-		    android:onClick="showDatePickerDialog" />
+        	android:text="JJ-MM-AAAA" />
         
         <Button
-            android:id="@+id/picker_date"
+            android:id="@+id/picker_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" 
-            android:onClick="showTimePickerDialog"/>
+        	android:text="hh:mm" />
         
         <CheckBox 
             android:id="@+id/checkbox_time"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onCheckboxClicked" />
+            android:layout_height="wrap_content"   />
 
     </LinearLayout>
     
