@@ -11,6 +11,7 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 public class Main extends ListActivity {
 	private List<SMS> listeSMS;
@@ -59,6 +60,12 @@ public class Main extends ListActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+    
+    public void clicSMS(View V){
+    	Intent intent = new Intent(this, ModifySMS.class);
+        //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
     
 }
