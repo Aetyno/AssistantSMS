@@ -5,7 +5,7 @@ import java.util.List;
 import resources.SMS;
 
 import m2.ihm.assistantsms.adapter.SMSAdapter;
-import m2.ihm.assistantsms.model.Singleton;
+import m2.ihm.assistantsms.base_de_donnees.MaBaseGestion;
 import android.os.Bundle;
 import android.app.ListActivity;
 import android.view.Menu;
@@ -16,8 +16,11 @@ public class History extends ListActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        List<SMS> listSMS = Singleton.getModel().getListeHistorique();
+        MaBaseGestion maBaseGestion = new MaBaseGestion(this);
+        
+        maBaseGestion.open();
+        List<SMS> listSMS = maBaseGestion.getAllSMS();
+        maBaseGestion.close();
         SMSAdapter adapter = new SMSAdapter(this, listSMS);
         setListAdapter(adapter);
     }

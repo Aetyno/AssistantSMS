@@ -4,8 +4,6 @@ import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
 
-import m2.ihm.assistantsms.model.Model;
-import m2.ihm.assistantsms.model.Singleton;
 import m2.ihm.assistantsms.base_de_donnees.MaBaseGestion;
 
 import resources.DatePickerFragment;
@@ -64,12 +62,12 @@ public class CreateSMS extends FragmentActivity implements OnClickListener{
         editTextContact = (EditText) findViewById(R.id.editTextContact);
         editTextLocalisation = (EditText) findViewById(R.id.editTextLocalisation);
         editTextSMS = (EditText) findViewById(R.id.editTextSMS);
+        buttonDate = (Button)findViewById(R.id.picker_date);
+		buttonTime = (Button)findViewById(R.id.picker_time);
     }
 
 
 	private void setCurrentTimeOnView() {
-		buttonDate = (Button)findViewById(R.id.picker_date);
-		buttonTime = (Button)findViewById(R.id.picker_time);
 		buttonTime.setOnClickListener(this);
 		final Calendar c = Calendar.getInstance();
 		hour = c.get(Calendar.HOUR_OF_DAY);
@@ -133,12 +131,11 @@ public class CreateSMS extends FragmentActivity implements OnClickListener{
             	maBaseGestion.open();
             	maBaseGestion.insertSMS(
             			editTextContact.getText().toString(), 
-            			new Timestamp(2012,9,16,15,57,0,0),
+            			new Timestamp((2012 - 1900),(9 - 2),16,15,57,0,0),
             			editTextLocalisation.getText().toString(), 
             			editTextSMS.getText().toString());
             	maBaseGestion.close();
             	
-            	//((Model) Singleton.getModel()).addSMSListeSMS("Destinaire", new Date(), "localisation", "sms");
       
             	toast = Toast.makeText(getApplicationContext(), "Message enregistré", Toast.LENGTH_SHORT);
             	toast.show();
@@ -211,8 +208,6 @@ public class CreateSMS extends FragmentActivity implements OnClickListener{
 			// set current time into textview
 			buttonTime.setText(new StringBuilder().append(pad(hour))
 					.append(":").append(pad(minute)));
-
-
 		}
 	};
 
