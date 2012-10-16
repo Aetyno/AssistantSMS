@@ -23,7 +23,7 @@ public class Main extends ListActivity {
         MaBaseGestion maBaseGestion = new MaBaseGestion(this);
         
         maBaseGestion.open();
-        listeSMS = maBaseGestion.getAllSMS();//Singleton.getModel().getListeSMS();
+        listeSMS = maBaseGestion.getAllSMS();
         maBaseGestion.close();
         SMSAdapter adapter = new SMSAdapter(this, listeSMS);
         setListAdapter(adapter);
