@@ -1,5 +1,6 @@
 package m2.ihm.assistantsms.base_de_donnees;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import resources.SMS;
@@ -54,24 +55,22 @@ public class MaBaseGestion {
 		return bdd;
 	}
 	
-	public long insertSMS(SMS _sms){
+	public long insertSMS(String _contact, Timestamp _date, String _localisation, String _message){
 		ContentValues values = new ContentValues();
-		values.put(COL_MESSAGE, _sms.getMessage());
-		values.put(COL_CONTACT, _sms.getDestinataire());
-		values.put(COL_LOCALISATION, _sms.getLocalisation());
-		values.put(COL_DATE, _sms.getDateString());
-		values.put(COL_IS_SENT, _sms.getIsSent());
+		values.put(COL_MESSAGE, _message);
+		values.put(COL_CONTACT, _contact);
+		values.put(COL_LOCALISATION, _localisation);
+		values.put(COL_DATE, _date.toString());
 		
 		return bdd.insert(TABLE_SMS, null, values);
 	}
 	
-	public int updateSMS(SMS _sms, int _id){
+	public int updateSMS(int _id, String _contact, Timestamp _date, String _localisation, String _message){
 		ContentValues values = new ContentValues();
-		values.put(COL_MESSAGE, _sms.getMessage());
-		values.put(COL_CONTACT, _sms.getDestinataire());
-		values.put(COL_LOCALISATION, _sms.getLocalisation());
-		values.put(COL_DATE, _sms.getDateString());
-		values.put(COL_IS_SENT, _sms.getIsSent());
+		values.put(COL_MESSAGE, _message);
+		values.put(COL_CONTACT, _contact);
+		values.put(COL_LOCALISATION, _localisation);
+		values.put(COL_DATE, _date.toString());
 		
 		return bdd.update(TABLE_SMS, values, COL_ID + "=" + _id, null);
 	}
@@ -114,7 +113,7 @@ public class MaBaseGestion {
 		for(int i=0;i<nbMessage;i++){
 			sms = new SMS();
 			sms.setMessage(c.getString(NUM_COL_MESSAGE));
-			sms.setDateString(c.getString(NUM_COL_DATE));
+			sms.setDate(Timestamp.valueOf(c.getString(NUM_COL_DATE)));
 			sms.setDestinataire(c.getString(NUM_COL_CONTACT));
 			sms.setLocalisation(c.getString(NUM_COL_LOCALISATION));
 			sms.setID(c.getInt(NUM_COL_ID));

@@ -1,5 +1,6 @@
 package m2.ihm.assistantsms;
 
+import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -59,7 +60,10 @@ public class CreateSMS extends FragmentActivity implements OnClickListener{
         checkboxtime = (CheckBox) findViewById(R.id.checkbox_time);
         checkboxtime.setChecked(true);
         setCurrentTimeOnView();
-       
+        
+        editTextContact = (EditText) findViewById(R.id.editTextContact);
+        editTextLocalisation = (EditText) findViewById(R.id.editTextLocalisation);
+        editTextSMS = (EditText) findViewById(R.id.editTextSMS);
     }
 
 
@@ -79,16 +83,18 @@ public class CreateSMS extends FragmentActivity implements OnClickListener{
 		// TODO Auto-generated method stub
 		showDialog(TIME_DIALOG_ID);
 	}
+	
+	
     public void doLaunchContactPicker(View view) {  
         Intent contactPickerIntent = new Intent(Intent.ACTION_PICK,  
                 Contacts.CONTENT_URI);  
         contactPickerIntent.setType(Phone.CONTENT_TYPE);
         startActivityForResult(contactPickerIntent, CONTACT_PICKER_RESULT);  
     }  
+    
+    
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-    	editTextContact = (EditText) findViewById(R.id.editTextContact);
         if (requestCode == CONTACT_PICKER_RESULT) {
             if (resultCode == RESULT_OK) {
                 Uri contactUri = data.getData();
@@ -103,6 +109,7 @@ public class CreateSMS extends FragmentActivity implements OnClickListener{
             }
         }
     }
+    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_create_sms, menu);
@@ -113,8 +120,7 @@ public class CreateSMS extends FragmentActivity implements OnClickListener{
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent intent;
         Toast toast;
-    	editTextLocalisation = (EditText) findViewById(R.id.editTextLocalisation);
-    	editTextSMS = (EditText) findViewById(R.id.editTextSMS);
+    	
     	switch (item.getItemId()) {
             case android.R.id.home:
                 // app icon in action bar clicked; go home
@@ -125,8 +131,11 @@ public class CreateSMS extends FragmentActivity implements OnClickListener{
                 
             case R.id.menu_accept:
             	maBaseGestion.open();
-            	maBaseGestion.insertSMS(new SMS(editTextContact.getText().toString(), new Date(),
-            			editTextLocalisation.getText().toString(), editTextSMS.getText().toString()));
+            	maBaseGestion.insertSMS(
+            			editTextContact.getText().toString(), 
+            			new Timestamp(2012,9,16,15,57,0,0),
+            			editTextLocalisation.getText().toString(), 
+            			editTextSMS.getText().toString());
             	maBaseGestion.close();
             	
             	//((Model) Singleton.getModel()).addSMSListeSMS("Destinaire", new Date(), "localisation", "sms");

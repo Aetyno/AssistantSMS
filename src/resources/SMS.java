@@ -1,11 +1,12 @@
 package resources;
 
 import java.util.Date;
+import java.sql.Timestamp;
 
 public class SMS {
 
 	private String destinataire;
-	private Date date;	
+	private Timestamp date;	
 	private String localisation;	
 	private String message;
 
@@ -22,26 +23,9 @@ public class SMS {
 		isSent=0;
 	}
 	
-	public SMS(String _destinataire, Date _date,
-			String _localisation, String _message) {
-		// TODO Auto-generated constructor stub
-		destinataire=_destinataire;
-		date=_date;
-		localisation=_localisation;
-		message=_message;
-		id=-1;
-	}
-	
-	/** GETTER **/
-	public Date getDate() {
+	/** GETTER **/	
+	public Timestamp getDate(){
 		return date;
-	}
-	
-	public String getDateString(){
-		if(date != null){
-			return date.toString();	
-		}
-		else return "";
 	}
 	
 	public String getLocalisation() {
@@ -79,14 +63,10 @@ public class SMS {
 		this.destinataire = destinataire;
 	}
 	
-	public void setDate(Date date) {
+	public void setDate(Timestamp date) {
 		this.date = date;
 	}
-	
-	public void setDateString(String _date){
-		date = new Date();
-	}
-	
+
 	public void setID(int _id){
 		id=_id;
 	}

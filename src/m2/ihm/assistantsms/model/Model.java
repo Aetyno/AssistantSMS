@@ -23,8 +23,9 @@ public class Model{
 		return listeHistorique;
 	}
 	
+	/*
 	public void addSMSListeSMS(String _destinataire, Date _date, String _localisation, String _message){
 		SMS sms = new SMS(_destinataire,_date,_localisation,_message);
 		listeSMS.add(sms);
-	}
+	}*/
 }

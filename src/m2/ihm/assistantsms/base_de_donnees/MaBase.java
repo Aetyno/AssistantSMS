@@ -20,7 +20,7 @@ public class MaBase extends SQLiteOpenHelper{
 			" CREATE TABLE " + TABLE_SMS + " ( "	+ COL_ID + 				" INTEGER PRIMARY KEY AUTOINCREMENT, " 
 													+ COL_CONTACT + 		" TEXT, " 
 													+ COL_LOCALISATION + 	" TEXT, " 
-													+ COL_DATE + 			" TEXT, " 
+													+ COL_DATE + 			" TIMESTAMP, " 
 													+ COL_MESSAGE + 		" TEXT, " 
 													+ COL_IS_SENT + 		" INTEGER ) ; ";
 	
