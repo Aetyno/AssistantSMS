@@ -51,6 +51,8 @@ private List<String> listeContact;
                  String id = cur.getString(cur.getColumnIndex(ContactsContract.Contacts._ID));
                  if (a1num.compareTo("1") == 1)
                 	 listeContact.add(name+"=>"+num);
+                 else
+                	 listeContact.add("coucou");
  
              } while (cur.moveToNext());
          }

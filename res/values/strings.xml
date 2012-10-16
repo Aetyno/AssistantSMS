@@ -26,5 +26,6 @@
     <string name="mapKey">0bZmJZZKGv4V7_gaxCqrhjaoh7wHjfQ5uGMmFQw</string>
     <string name="title_activity_contact">Contact</string>
     <string name="stringcontact">contact</string>
+    <string name="time">HH:MM</string>
 
 </resources>
