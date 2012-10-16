@@ -14,6 +14,7 @@ import resources.TimePickerFragment;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
@@ -26,6 +27,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -33,11 +35,12 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 
 public class CreateSMS extends FragmentActivity implements OnClickListener{
-	private DialogFragment newFragment1;
-	private DialogFragment newFragment2;
 	private Button buttonDate = null;
 	private Button buttonTime = null;
 	private CheckBox checkboxtime = null;
+	private EditText editTextContact = null;
+	private EditText editTextLocalisation = null;
+	private EditText editTextSMS = null;
 	private int hour;
 	private int minute;
     private static final int CONTACT_PICKER_RESULT = 1001;  
@@ -79,9 +82,27 @@ public class CreateSMS extends FragmentActivity implements OnClickListener{
     public void doLaunchContactPicker(View view) {  
         Intent contactPickerIntent = new Intent(Intent.ACTION_PICK,  
                 Contacts.CONTENT_URI);  
+        contactPickerIntent.setType(Phone.CONTENT_TYPE);
         startActivityForResult(contactPickerIntent, CONTACT_PICKER_RESULT);  
     }  
-    
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+    	editTextContact = (EditText) findViewById(R.id.editTextContact);
+        if (requestCode == CONTACT_PICKER_RESULT) {
+            if (resultCode == RESULT_OK) {
+                Uri contactUri = data.getData();
+                String[] projection = {Phone.NUMBER};
+                Cursor cursor = getContentResolver()
+                        .query(contactUri, projection, null, null, null);
+                cursor.moveToFirst();
+
+                int column = cursor.getColumnIndex(Phone.NUMBER);
+                String number = cursor.getString(column);
+                editTextContact.setText(number);
+            }
+        }
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_create_sms, menu);
@@ -92,6 +113,8 @@ public class CreateSMS extends FragmentActivity implements OnClickListener{
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent intent;
         Toast toast;
+    	editTextLocalisation = (EditText) findViewById(R.id.editTextLocalisation);
+    	editTextSMS = (EditText) findViewById(R.id.editTextSMS);
     	switch (item.getItemId()) {
             case android.R.id.home:
                 // app icon in action bar clicked; go home
@@ -102,7 +125,8 @@ public class CreateSMS extends FragmentActivity implements OnClickListener{
                 
             case R.id.menu_accept:
             	maBaseGestion.open();
-            	maBaseGestion.insertSMS(new SMS("Destinaire", new Date(), "localisation", "sms"));
+            	maBaseGestion.insertSMS(new SMS(editTextContact.getText().toString(), new Date(),
+            			editTextLocalisation.getText().toString(), editTextSMS.getText().toString()));
             	maBaseGestion.close();
             	
             	//((Model) Singleton.getModel()).addSMSListeSMS("Destinaire", new Date(), "localisation", "sms");
