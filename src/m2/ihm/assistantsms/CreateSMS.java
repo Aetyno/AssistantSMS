@@ -1,7 +1,6 @@
 package m2.ihm.assistantsms;
 
 import java.sql.Timestamp;
-import java.util.Calendar;
 
 import resources.DatePickerFragment;
 import resources.TimePickerFragment;
@@ -11,25 +10,23 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
-import android.app.Dialog;
-import android.app.DialogFragment;
-import android.app.TimePickerDialog;
+import android.support.v4.app.FragmentActivity;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.TimePicker;
 import android.widget.Toast;
-import android.support.v4.app.FragmentActivity;
 
+
+@SuppressLint("NewApi")
 public class CreateSMS extends FragmentActivity{
-	private TimePickerFragment newFragment1;
-	private DatePickerFragment newFragment2;
+	private TimePickerFragment fragmentTime;
+	private DatePickerFragment fragmentDate;
 
 	private Button buttonDate = null;
 	private Button buttonTime = null;
@@ -37,22 +34,16 @@ public class CreateSMS extends FragmentActivity{
 	private EditText editTextContact = null;
 	private EditText editTextLocalisation = null;
 	private EditText editTextSMS = null;
-	private int hour;
-	private int minute;
     private static final int CONTACT_PICKER_RESULT = 1001;  
-    
-	private static final int TIME_DIALOG_ID = 999;
-	private static final int DATE_DIALOG_ID = 998;
 
 	private MaBaseGestion  maBaseGestion= new MaBaseGestion(this);
 
     
-    @Override
+	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_sms);
-        checkboxtime = (CheckBox) findViewById(R.id.checkbox_time);
-        checkboxtime.setChecked(true);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
         init();
         
         
@@ -66,9 +57,13 @@ public class CreateSMS extends FragmentActivity{
 		buttonDate = (Button)findViewById(R.id.picker_date);
 		buttonTime = (Button)findViewById(R.id.picker_time);
 
-    	newFragment1 = new TimePickerFragment(buttonTime);
-    	
-		newFragment2 = new DatePickerFragment(buttonDate);
+        checkboxtime = (CheckBox) findViewById(R.id.checkbox_time);
+        checkboxtime.setChecked(true);
+        
+    	fragmentTime = new TimePickerFragment(buttonTime);
+		fragmentDate = new DatePickerFragment(buttonDate);
+    	fragmentTime.ModifierButton();
+		fragmentDate.ModifierButton();
     }
 	
 	
@@ -114,13 +109,27 @@ public class CreateSMS extends FragmentActivity{
                 //intent = new Intent(this, Main.class);
                 //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 //startActivity(intent);
+            	Intent parentActivityIntent = new Intent(this, Main.class);
+                parentActivityIntent.addFlags(
+                        Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                        Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(parentActivityIntent);
+                finish();
                 return true;
                 
             case R.id.menu_accept:
             	maBaseGestion.open();
+            	Timestamp timestamp = null;
+            	if(checkboxtime.isChecked())
+            		timestamp = new Timestamp(fragmentDate.getYear(),
+            				fragmentDate.getMonth(),
+            				fragmentDate.getDay(),
+            				fragmentTime.getHour(),
+            				fragmentTime.getMinute(),0,0);
+            		
             	maBaseGestion.insertSMS(
             			editTextContact.getText().toString(), 
-            			new Timestamp(2012,9,16,15,57,0,0),
+            			timestamp,
             			editTextLocalisation.getText().toString(), 
             			editTextSMS.getText().toString());
             	maBaseGestion.close();
@@ -178,48 +187,14 @@ public class CreateSMS extends FragmentActivity{
     	}
     }
     public void showTimePickerDialog(View v) {
-    	newFragment1.show(getSupportFragmentManager(), "timePicker");
+    	fragmentTime.show(getSupportFragmentManager(), "timePicker");
+    	showDialog(999);
     }
 
 	public void showDatePickerDialog(View v) {
-		newFragment2.show(getSupportFragmentManager(), "datePicker");
+		fragmentDate.show(getSupportFragmentManager(), "datePicker");
+    	showDialog(998);
 	}
-	/*@Override
-	protected Dialog onCreateDialog(int id) {
-		switch (id) {
-			case TIME_DIALOG_ID:
-				// set time picker as current time
-				return new TimePickerDialog(this, timePickerListener, hour, minute,
-						false);
-
-			case DATE_DIALOG_ID:
-				// set time picker as current time
-				//return new DatePickerDialog(this, datePickerListener, hour, minute,
-				//		false);
 	
-			}
-		return null;
-	}
-
-	private TimePickerDialog.OnTimeSetListener timePickerListener = new TimePickerDialog.OnTimeSetListener() {
-		public void onTimeSet(TimePicker view, int selectedHour,
-				int selectedMinute) {
-			hour = selectedHour;
-			minute = selectedMinute;
-
-			// set current time into textview
-			buttonTime.setText(new StringBuilder().append(pad(hour))
-					.append(":").append(pad(minute)));
-
-
-		}
-	};
-*/
-	private static String pad(int c) {
-		if (c >= 10)
-			return String.valueOf(c);
-		else
-			return "0" + String.valueOf(c);
-	}
 	
 }

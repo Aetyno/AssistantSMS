@@ -2,7 +2,6 @@ package resources;
 
 import java.util.Calendar;
 
-import m2.ihm.assistantsms.R;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -15,13 +14,14 @@ import android.app.TimePickerDialog;
 public class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
 
 	private int hour;
-	
-
 	private int minute;
 	private Button buttonTime;
 	
 	public TimePickerFragment(Button buttonTime){
 		this.buttonTime = buttonTime;
+		 final Calendar c = Calendar.getInstance();
+	     hour = c.get(Calendar.HOUR_OF_DAY);
+	     minute = c.get(Calendar.MINUTE);
 	}
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -29,8 +29,6 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
 		 final Calendar c = Calendar.getInstance();
 	     hour = c.get(Calendar.HOUR_OF_DAY);
 	     minute = c.get(Calendar.MINUTE);
-	     buttonTime.setText(new StringBuilder().append(pad(hour)).append(":")
-	    					.append(pad(minute)));
 	        // Create a new instance of TimePickerDialog and return it
 	        return new TimePickerDialog(getActivity(), this, hour, minute,
 	                DateFormat.is24HourFormat(getActivity()));
@@ -56,7 +54,6 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
 		else
 			return "0" + String.valueOf(c);
 	}
-	
 	public int getHour() {
 		return hour;
 	}

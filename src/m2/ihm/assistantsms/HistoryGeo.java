@@ -5,8 +5,10 @@ import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 
 public class HistoryGeo extends MapActivity {
 
@@ -17,7 +19,9 @@ public class HistoryGeo extends MapActivity {
     public void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
-       	
+
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+        
 		this.mapView =  new MapView(this,this.getResources().getString(R.string.mapKey));
 		this.mapView.setClickable(true);
  		this.mc = this.mapView.getController();
@@ -51,5 +55,20 @@ public class HistoryGeo extends MapActivity {
         getMenuInflater().inflate(R.menu.activity_history_geo, menu);
         return true;
     }
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // This is called when the Home (Up) button is pressed
+                // in the Action Bar.
+                Intent parentActivityIntent = new Intent(this, Main.class);
+                parentActivityIntent.addFlags(
+                        Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                        Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(parentActivityIntent);
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
