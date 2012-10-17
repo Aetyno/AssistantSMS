@@ -2,22 +2,18 @@ package m2.ihm.assistantsms;
 
 import java.sql.Timestamp;
 import java.util.Calendar;
-import java.util.Date;
-
-import m2.ihm.assistantsms.base_de_donnees.MaBaseGestion;
 
 import resources.DatePickerFragment;
-import resources.SMS;
 import resources.TimePickerFragment;
+import m2.ihm.assistantsms.base_de_donnees.MaBaseGestion;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
 import android.app.Dialog;
+import android.app.DialogFragment;
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.view.Menu;
@@ -27,13 +23,14 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TimePicker;
 import android.widget.Toast;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 
-public class CreateSMS extends FragmentActivity implements OnClickListener{
+public class CreateSMS extends FragmentActivity{
+	private TimePickerFragment newFragment1;
+	private DatePickerFragment newFragment2;
+
 	private Button buttonDate = null;
 	private Button buttonTime = null;
 	private CheckBox checkboxtime = null;
@@ -43,13 +40,12 @@ public class CreateSMS extends FragmentActivity implements OnClickListener{
 	private int hour;
 	private int minute;
     private static final int CONTACT_PICKER_RESULT = 1001;  
-
+    
+	private static final int TIME_DIALOG_ID = 999;
+	private static final int DATE_DIALOG_ID = 998;
 
 	private MaBaseGestion  maBaseGestion= new MaBaseGestion(this);
-	
-    @SuppressWarnings("unused")
 
-	static final int TIME_DIALOG_ID = 999;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,30 +53,23 @@ public class CreateSMS extends FragmentActivity implements OnClickListener{
         setContentView(R.layout.activity_create_sms);
         checkboxtime = (CheckBox) findViewById(R.id.checkbox_time);
         checkboxtime.setChecked(true);
-        setCurrentTimeOnView();
+        init();
         
+        
+    }
+
+    private void init(){
+
         editTextContact = (EditText) findViewById(R.id.editTextContact);
         editTextLocalisation = (EditText) findViewById(R.id.editTextLocalisation);
         editTextSMS = (EditText) findViewById(R.id.editTextSMS);
-        buttonDate = (Button)findViewById(R.id.picker_date);
+		buttonDate = (Button)findViewById(R.id.picker_date);
 		buttonTime = (Button)findViewById(R.id.picker_time);
+
+    	newFragment1 = new TimePickerFragment(buttonTime);
+    	
+		newFragment2 = new DatePickerFragment(buttonDate);
     }
-
-
-	private void setCurrentTimeOnView() {
-		buttonTime.setOnClickListener(this);
-		final Calendar c = Calendar.getInstance();
-		hour = c.get(Calendar.HOUR_OF_DAY);
-		minute = c.get(Calendar.MINUTE);
-		buttonTime.setText(new StringBuilder().append(pad(hour)).append(":")
-				.append(pad(minute)));
-	}
-
-	@SuppressWarnings("deprecation")
-	public void onClick(View v) {
-		// TODO Auto-generated method stub
-		showDialog(TIME_DIALOG_ID);
-	}
 	
 	
     public void doLaunchContactPicker(View view) {  
@@ -131,11 +120,12 @@ public class CreateSMS extends FragmentActivity implements OnClickListener{
             	maBaseGestion.open();
             	maBaseGestion.insertSMS(
             			editTextContact.getText().toString(), 
-            			new Timestamp((2012 - 1900),(9 - 2),16,15,57,0,0),
+            			new Timestamp(2012,9,16,15,57,0,0),
             			editTextLocalisation.getText().toString(), 
             			editTextSMS.getText().toString());
             	maBaseGestion.close();
             	
+            	//((Model) Singleton.getModel()).addSMSListeSMS("Destinaire", new Date(), "localisation", "sms");
       
             	toast = Toast.makeText(getApplicationContext(), "Message enregistré", Toast.LENGTH_SHORT);
             	toast.show();
@@ -187,13 +177,25 @@ public class CreateSMS extends FragmentActivity implements OnClickListener{
     			}
     	}
     }
-	@Override
+    public void showTimePickerDialog(View v) {
+    	newFragment1.show(getSupportFragmentManager(), "timePicker");
+    }
+
+	public void showDatePickerDialog(View v) {
+		newFragment2.show(getSupportFragmentManager(), "datePicker");
+	}
+	/*@Override
 	protected Dialog onCreateDialog(int id) {
 		switch (id) {
 			case TIME_DIALOG_ID:
 				// set time picker as current time
 				return new TimePickerDialog(this, timePickerListener, hour, minute,
 						false);
+
+			case DATE_DIALOG_ID:
+				// set time picker as current time
+				//return new DatePickerDialog(this, datePickerListener, hour, minute,
+				//		false);
 	
 			}
 		return null;
@@ -208,9 +210,11 @@ public class CreateSMS extends FragmentActivity implements OnClickListener{
 			// set current time into textview
 			buttonTime.setText(new StringBuilder().append(pad(hour))
 					.append(":").append(pad(minute)));
+
+
 		}
 	};
-
+*/
 	private static String pad(int c) {
 		if (c >= 10)
 			return String.valueOf(c);

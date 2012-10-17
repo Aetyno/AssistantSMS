@@ -54,12 +54,14 @@
             android:id="@+id/picker_date" 
     		android:layout_width="wrap_content" 
 		    android:layout_height="wrap_content"
+		    android:onClick="showDatePickerDialog"
         	android:text="JJ-MM-AAAA" />
         
         <Button
             android:id="@+id/picker_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" 
+		    android:onClick="showTimePickerDialog"
         	android:text="hh:mm" />
         
         <CheckBox 

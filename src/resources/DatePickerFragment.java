@@ -6,10 +6,15 @@ import android.app.Dialog;
 import android.support.v4.app.DialogFragment;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.DatePicker;
 
 public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 	
+	public DatePickerFragment (Button buttonDate){
+		
+		
+	}
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		// Use the current date as the default date in the picker
