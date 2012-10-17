@@ -21,11 +21,11 @@ public class Main extends ListActivity {
         super.onCreate(savedInstanceState);
         MaBaseGestion maBaseGestion = new MaBaseGestion(this);
         
-        maBaseGestion.open();
+      /*  maBaseGestion.open();
         listeSMS = maBaseGestion.getAllSMS();
         maBaseGestion.close();
         SMSAdapter adapter = new SMSAdapter(this, listeSMS);
-        setListAdapter(adapter);
+        setListAdapter(adapter);*/
     }
 
     @Override

@@ -122,16 +122,16 @@ public class CreateSMS extends FragmentActivity{
             	Timestamp timestamp = null;
             	if(checkboxtime.isChecked())
             		timestamp = new Timestamp(fragmentDate.getYear(),
-            				fragmentDate.getMonth(),
-            				fragmentDate.getDay(),
-            				fragmentTime.getHour(),
-            				fragmentTime.getMinute(),0,0);
+						            				fragmentDate.getMonth(),
+						            				fragmentDate.getDay(),
+						            				fragmentTime.getHour(),
+						            				fragmentTime.getMinute(),0,0);
             		
             	maBaseGestion.insertSMS(
-            			editTextContact.getText().toString(), 
-            			timestamp,
-            			editTextLocalisation.getText().toString(), 
-            			editTextSMS.getText().toString());
+		            			editTextContact.getText().toString(), 
+		            			timestamp,
+		            			editTextLocalisation.getText().toString(), 
+		            			editTextSMS.getText().toString());
             	maBaseGestion.close();
             	
             	//((Model) Singleton.getModel()).addSMSListeSMS("Destinaire", new Date(), "localisation", "sms");

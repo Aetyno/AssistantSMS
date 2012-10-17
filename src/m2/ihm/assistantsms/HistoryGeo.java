@@ -5,11 +5,14 @@ import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 
+@SuppressLint("NewApi")
 public class HistoryGeo extends MapActivity {
 
 	private MapView mapView;
@@ -32,6 +35,7 @@ public class HistoryGeo extends MapActivity {
  		this.mc.setZoom(17);
  		this.mapView.setSatellite(true);
  		this.mapView.invalidate();
+ 		this.mapView.setBuiltInZoomControls(true);
 
 		this.setContentView(this.mapView);
    	}
@@ -71,4 +75,15 @@ public class HistoryGeo extends MapActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+    	if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
+    		mapView.setSatellite(true);
+    		return true;
+    	} else if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
+    		mapView.setSatellite(false);
+    		return true;
+    	} 
+    	return super.onKeyDown(keyCode, event);
+    }	
 }
