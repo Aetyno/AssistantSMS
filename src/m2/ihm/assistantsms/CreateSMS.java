@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 
@@ -30,6 +31,7 @@ public class CreateSMS extends FragmentActivity{
 
 	private Button buttonDate = null;
 	private Button buttonTime = null;
+	private ImageButton buttonMap = null;	
 	private CheckBox checkboxtime = null;
 	private EditText editTextContact = null;
 	private EditText editTextLocalisation = null;
@@ -56,7 +58,11 @@ public class CreateSMS extends FragmentActivity{
         editTextSMS = (EditText) findViewById(R.id.editTextSMS);
 		buttonDate = (Button)findViewById(R.id.picker_date);
 		buttonTime = (Button)findViewById(R.id.picker_time);
-
+		
+		buttonMap = (ImageButton)findViewById(R.id.button_map);
+		buttonMap.setEnabled(false);
+		editTextLocalisation.setEnabled(false);
+		
         checkboxtime = (CheckBox) findViewById(R.id.checkbox_time);
         checkboxtime.setChecked(true);
         
@@ -121,7 +127,7 @@ public class CreateSMS extends FragmentActivity{
             	maBaseGestion.open();
             	Timestamp timestamp = null;
             	if(checkboxtime.isChecked())
-            		timestamp = new Timestamp(fragmentDate.getYear(),
+            		timestamp = new Timestamp(fragmentDate.getYear()-1900,
 						            				fragmentDate.getMonth(),
 						            				fragmentDate.getDay(),
 						            				fragmentTime.getHour(),
@@ -170,17 +176,25 @@ public class CreateSMS extends FragmentActivity{
     	switch(view.getId()){
     		case R.id.checkbox_map:
     			if(checked){
+    				buttonMap.setEnabled(true);
+    				editTextLocalisation.setEnabled(true);
+    				editTextLocalisation.setText("");
     			}
     			else{
-    				
+    				buttonMap.setEnabled(false);
+    				editTextLocalisation.setEnabled(false);    				
     			}
     			break;
     		case R.id.checkbox_time:
     			if(checked){
-    				
+    				buttonDate.setEnabled(true);
+    				buttonTime.setEnabled(true);
+    				fragmentDate.ModifierButton();
+    				fragmentTime.ModifierButton();
     			}
     			else{
-
+    				buttonDate.setEnabled(false);
+    				buttonTime.setEnabled(false);
     				buttonDate.setText("JJ-MM-AAAA");
     				buttonTime.setText("HH:MM");
     			}
