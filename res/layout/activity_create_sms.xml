@@ -28,6 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
+        	android:text="" 
             />
 
     </LinearLayout>
@@ -91,7 +92,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="textPostalAddress" 
+            android:inputType="textPostalAddress"
+        	android:text=""  
             />
         		<CheckBox 
             android:id="@+id/checkbox_map"
@@ -111,7 +113,8 @@
         android:id="@+id/editTextSMS"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10" >
+        android:ems="10" 
+        android:text=""  >
 
         <requestFocus />
     </EditText>
