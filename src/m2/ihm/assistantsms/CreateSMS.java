@@ -158,10 +158,8 @@ public class CreateSMS extends FragmentActivity{
 	                startActivity(intent);
             	}
             	else{
-            		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-            				context);
-             
-            			// set title
+            		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+              			// set title
             			alertDialogBuilder.setTitle("Erreur");
              
             			// set dialog message

@@ -17,11 +17,11 @@ public class ListItimizedOverlay extends ItemizedOverlay<OverlayItem>
 	 {
 		 super(boundCenterBottom(defaultMarker));
 	 }
-	/* public ListItimizedOverlay(Drawable defaultMarker, Context pContext)
+	 public ListItimizedOverlay(Drawable defaultMarker, Context pContext)
 	 {
 		 super(boundCenterBottom(defaultMarker));
 		 this.context = pContext;
-	 }*/
+	 }
 	 @Override
 	 protected OverlayItem createItem(int i)
 	 {

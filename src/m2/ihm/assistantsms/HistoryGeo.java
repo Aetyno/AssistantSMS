@@ -1,5 +1,6 @@
 package m2.ihm.assistantsms;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
@@ -18,6 +19,7 @@ import com.google.android.maps.OverlayItem;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -30,63 +32,64 @@ public class HistoryGeo extends MapActivity {
 	private List<SMS> listeSMS;
 	private MapView mapView;
 	private MapController mc;
-	private Geocoder geocoder;
+	//private Geocoder geocoder = new Geocoder(this, Locale.getDefault());;
 	private GeoPoint location;
-	private Drawable drawable ;
 	private ListItimizedOverlay itemizedoverlay;
-	private MyLocationOverlay myLocation = null;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
-		super.onCreate(savedInstanceState);
-		//initialise la liste des messages envoyés
 		MaBaseGestion maBaseGestion = new MaBaseGestion(this);        
         maBaseGestion.open();
         listeSMS = maBaseGestion.getAllSMS();
         maBaseGestion.close();
         
         getActionBar().setDisplayHomeAsUpEnabled(true);
-        //initialise google map
-		this.mapView =  new MapView(this,this.getResources().getString(R.string.mapKey));
-		this.mapView.setClickable(true);
- 		this.mc = this.mapView.getController();
- 		//localisation 
- 		myLocation = new MyLocationOverlay(getApplicationContext(), mapView);
- 		mapView.getOverlays().add(myLocation);
- 		myLocation.enableMyLocation();
- 		double latitude = 43.5878314;
- 		double longitude = 1.4367727;
- 		this.location = new GeoPoint((int) (latitude * 1000000.0),(int) (longitude * 1000000.0));
-		this.mc.setCenter(this.location);
- 		this.mc.setZoom(17);
- 		this.mapView.setSatellite(false);
- 		this.mapView.invalidate();
- 		this.mapView.setBuiltInZoomControls(true);
- 		
- 		geocoder = new Geocoder(getApplicationContext(),Locale.getDefault());
-
-    	drawable = this.getResources().getDrawable(R.drawable.ic_launcher);
-    	itemizedoverlay = new ListItimizedOverlay(drawable);
- 		if(listeSMS.size() > 0){
-	 		for(SMS sms:listeSMS)
+       
+    	super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_history_geo);
+		
+		mapView = (MapView) this.findViewById(R.id.mapView);
+		mapView.setBuiltInZoomControls(true);
+		
+		Drawable drawable = this.getResources().getDrawable(R.drawable.ic_launcher);
+		itemizedoverlay = new ListItimizedOverlay(drawable,this);
+		
+		//toulouse
+		double latitude = 43.5878314;
+ 		double longitude =1.4367727;
+ 		location = new GeoPoint((int) (latitude * 1000000.0),(int) (longitude * 1000000.0));
+    			
+		if(listeSMS.size() > 0)
+			for(SMS sms:listeSMS)
 	 			AjoutMarqueur(sms);
-			List<Overlay> mapOverlays = mapView.getOverlays();
-			mapOverlays.add(itemizedoverlay);
-		}
- 		
-		this.setContentView(this.mapView);
+		List<Overlay> mapOverlays = mapView.getOverlays();
+		mapOverlays.add(itemizedoverlay);
 		
-		
+		mc = mapView.getController();
+		mc.setCenter(location);
+		mc.setZoom(10);
    	}
     
     public void AjoutMarqueur(SMS sms){
-		//test marqueur toulouse
- 		double latitude = 43.5878314;
- 		double longitude = 43.5878314;
-    	GeoPoint geoPoint = new GeoPoint((int) (latitude * 1000000.0),(int) (longitude * 1000000.0));
+    	/*try {
+			List<Address> listadress = geocoder.getFromLocationName("Toulouse", 1);
+			double longitude = listadress.get(0).getLongitude();
+			double latitude = listadress.get(0).getLatitude(); GeoPoint geoPoint = new GeoPoint((int) (latitude * 1000000.0),(int) (longitude * 1000000.0));
+	    	location = geoPoint;
+	    	OverlayItem overlayitem = new OverlayItem(geoPoint, "Hello from", "Tahiti");
+	    	itemizedoverlay.addOverlayItem(overlayitem);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		double latitude = 43.5878314;
+ 		double longitude =1.4367727;
+		GeoPoint geoPoint = new GeoPoint((int) (latitude * 1000000.0),(int) (longitude * 1000000.0));
+    	location = geoPoint;
     	OverlayItem overlayitem = new OverlayItem(geoPoint, "Hello from", "Tahiti");
     	itemizedoverlay.addOverlayItem(overlayitem);
+    	
     }
 
 	@Override
@@ -100,17 +103,32 @@ public class HistoryGeo extends MapActivity {
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+    	Intent intent;
         switch (item.getItemId()) {
             case android.R.id.home:
-                // This is called when the Home (Up) button is pressed
-                // in the Action Bar.
-                Intent parentActivityIntent = new Intent(this, Main.class);
-                parentActivityIntent.addFlags(
+                intent = new Intent(this, Main.class);
+                intent.addFlags(
                         Intent.FLAG_ACTIVITY_CLEAR_TOP |
                         Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(parentActivityIntent);
+                startActivity(intent);
                 finish();
                 return true;
+            case R.id.menu_history:
+            	intent = new Intent(this, History.class);
+                startActivity(intent);
+            	return true;
+            case R.id.menu_main:
+            	intent = new Intent(this, Main.class);
+                startActivity(intent);
+            	return true;
+            case R.id.menu_settings:
+            	intent = new Intent(this, Setting.class);
+                startActivity(intent);
+            	return true;
+            case R.id.menu_about:
+            	intent = new Intent(this, About.class);
+                startActivity(intent);
+            	return true;
         }
         return super.onOptionsItemSelected(item);
     }

@@ -2,11 +2,12 @@
 
     <string name="app_name">AssistantSMS</string>
     <string name="hello_world">Hello world!</string>
-    <string name="menu_settings">Paramèttre</string>
+    <string name="menu_settings">Paramètres</string>
     <string name="title_activity_main">AssistantSMS</string>
     <string name="menu_history">Historique</string>
     <string name="menu_history_geo">Historique geographique</string>
     <string name="menu_about">A propos</string>
+    <string name="menu_main">Manu Principal</string>
     <string name="title_activity_history">Historique</string>
     <string name="title_activity_history_geo">Historique géographique</string>
     <string name="title_activity_create_sms">Nouvel SMS</string>
