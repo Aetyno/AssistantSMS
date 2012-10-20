@@ -39,7 +39,7 @@ public class ListItimizedOverlay extends ItemizedOverlay<OverlayItem>
 		  arrayListOverlayItem.add(overlay);
 		  populate();
 	 }
-	/* @Override
+	 @Override
 	 protected boolean onTap(int index)
 	 {
 			  OverlayItem item = arrayListOverlayItem.get(index);
@@ -48,5 +48,5 @@ public class ListItimizedOverlay extends ItemizedOverlay<OverlayItem>
 			 dialog.setMessage(item.getSnippet());
 			 dialog.show();
 			 return true;
-	 }*/
+	 }
 }
