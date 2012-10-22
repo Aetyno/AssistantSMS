@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
+import android.location.Location;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -32,14 +33,15 @@ public class HistoryGeo extends MapActivity {
 	private List<SMS> listeSMS;
 	private MapView mapView;
 	private MapController mc;
-	//private Geocoder geocoder = new Geocoder(this, Locale.getDefault());;
+	private Geocoder geocoder ;
 	private GeoPoint location;
 	private ListItimizedOverlay itemizedoverlay;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
-		MaBaseSMSGestion maBaseGestion = new MaBaseSMSGestion(this);        
+		MaBaseSMSGestion maBaseGestion = new MaBaseSMSGestion(this);    
+    	geocoder = new Geocoder(this);     
         maBaseGestion.open();
         listeSMS = maBaseGestion.getAllSMS();
         maBaseGestion.close();
@@ -72,24 +74,21 @@ public class HistoryGeo extends MapActivity {
    	}
     
     public void AjoutMarqueur(SMS sms){
-    	/*try {
-			List<Address> listadress = geocoder.getFromLocationName("Toulouse", 1);
-			double longitude = listadress.get(0).getLongitude();
-			double latitude = listadress.get(0).getLatitude(); GeoPoint geoPoint = new GeoPoint((int) (latitude * 1000000.0),(int) (longitude * 1000000.0));
-	    	location = geoPoint;
-	    	OverlayItem overlayitem = new OverlayItem(geoPoint, "Hello from", "Tahiti");
-	    	itemizedoverlay.addOverlayItem(overlayitem);
+    	try {
+    		if(!sms.getLocalisation().equals("")){
+				List<Address> listadress = geocoder.getFromLocationName(sms.getLocalisation(), 1);
+				double longitude = listadress.get(0).getLongitude();
+				double latitude = listadress.get(0).getLatitude();
+				GeoPoint geoPoint = new GeoPoint((int) (latitude * 1000000.0),(int) (longitude * 1000000.0));
+		    	OverlayItem overlayitem = new OverlayItem(geoPoint, 
+		    			sms.getDestinataire(), sms.getMessage());
+		    	itemizedoverlay.addOverlayItem(overlayitem);
+    		}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
-		double latitude = 43.5878314;
- 		double longitude =1.4367727;
-		GeoPoint geoPoint = new GeoPoint((int) (latitude * 1000000.0),(int) (longitude * 1000000.0));
-    	location = geoPoint;
-    	OverlayItem overlayitem = new OverlayItem(geoPoint, "Hello from", "Tahiti");
-    	itemizedoverlay.addOverlayItem(overlayitem);
-    	
+		}
+   
     }
 
 	@Override

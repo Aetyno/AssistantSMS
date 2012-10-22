@@ -28,5 +28,7 @@
     <string name="title_activity_contact">Contact</string>
     <string name="stringcontact">contact</string>
     <string name="time">HH:MM</string>
+    <string name="title_activity_localisation">Localisation</string>
+    <string name="rechercheMap">Recherche Map</string>
 
 </resources>

@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+     <item 
+         android:id="@+id/menu_cancel_map" 
+         android:showAsAction="always" 
+         android:title="Annuler" 
+         android:icon="@drawable/ic_navigation_cancel"
+     ></item>
+     <item 
+         android:id="@+id/menu_accept_map" 
+         android:showAsAction="always" 
+         android:title="Valider" 
+         android:icon="@drawable/ic_navigation_accept"
+     ></item>
+
+</menu>

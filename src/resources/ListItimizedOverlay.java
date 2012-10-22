@@ -4,8 +4,12 @@ import java.util.ArrayList;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.view.MotionEvent;
 
+import com.google.android.maps.GeoPoint;
 import com.google.android.maps.ItemizedOverlay;
+import com.google.android.maps.MapController;
+import com.google.android.maps.MapView;
 import com.google.android.maps.OverlayItem;
 
 public class ListItimizedOverlay extends ItemizedOverlay<OverlayItem>
@@ -39,7 +43,12 @@ public class ListItimizedOverlay extends ItemizedOverlay<OverlayItem>
 		  arrayListOverlayItem.add(overlay);
 		  populate();
 	 }
-	/* @Override
+	 public void remove()
+	 {
+		  arrayListOverlayItem.clear();
+		  populate();
+	 }
+	 @Override
 	 protected boolean onTap(int index)
 	 {
 			  OverlayItem item = arrayListOverlayItem.get(index);
@@ -48,5 +57,20 @@ public class ListItimizedOverlay extends ItemizedOverlay<OverlayItem>
 			 dialog.setMessage(item.getSnippet());
 			 dialog.show();
 			 return true;
-	 }*/
+	 }
+	 @Override
+	 public boolean onTouchEvent(MotionEvent event, MapView mapView)
+	 {
+		 //---when user lifts his finger---
+		 if (event.getAction() == 1) {
+			 GeoPoint p = mapView.getProjection().fromPixels(
+			 (int) event.getX(),
+			 (int) event.getY());
+			 MapController mc = mapView.getController();
+				mc.setCenter(p);
+				mc.setZoom(10);
+		 }
+		 return false;
+	 }
+
 }

@@ -1,6 +1,7 @@
 package m2.ihm.assistantsms;
 
 import java.sql.Timestamp;
+import java.util.Calendar;
 
 import resources.DatePickerFragment;
 import resources.TimePickerFragment;
@@ -35,9 +36,13 @@ public class CreateSMS extends FragmentActivity{
 
 	private Button buttonDate = null;
 	private Button buttonTime = null;
+	
 	private ImageButton buttonMap = null;	
+	private ImageButton buttonCalendrier = null;	
+	
 	private CheckBox checkBoxTime = null;
 	private CheckBox checkBoxMap = null;
+	
 	private EditText editTextContact = null;
 	private EditText editTextLocalisation = null;
 	private EditText editTextSMS = null;
@@ -64,7 +69,8 @@ public class CreateSMS extends FragmentActivity{
         editTextSMS = (EditText) findViewById(R.id.editTextSMS);
 		buttonDate = (Button)findViewById(R.id.picker_date);
 		buttonTime = (Button)findViewById(R.id.picker_time);
-		
+
+		buttonCalendrier = (ImageButton)findViewById(R.id.button_calendar);
 		buttonMap = (ImageButton)findViewById(R.id.button_map);
 		buttonMap.setEnabled(false);
 		editTextLocalisation.setEnabled(false);
@@ -177,6 +183,7 @@ public class CreateSMS extends FragmentActivity{
 	            	
 	            	intent = new Intent(this, Main.class);
 	                //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	            	this.finish();
 	                startActivity(intent);
             	}
             	else{
@@ -221,11 +228,24 @@ public class CreateSMS extends FragmentActivity{
 			erreur =  "Vous n'avez pas écrit de texte";
 		else if(checkBoxMap.isChecked() && editTextLocalisation.getText().toString().equals(""))
 			erreur =  "vous n'avez pas choisi une localisation";
+		
+		else if(checkBoxTime.isChecked()){
+			Timestamp timestamp = new Timestamp(fragmentDate.getYear()-1900,
+    				fragmentDate.getMonth(),
+    				fragmentDate.getDay(),
+    				fragmentTime.getHour(),
+    				fragmentTime.getMinute(),0,0);
+			final Calendar c = Calendar.getInstance();
+			if(c.getTimeInMillis() > timestamp.getTime())
+				erreur =  "La date ou l'heure est inférieur a celle actuel";
+		}
+		else if (!checkBoxMap.isChecked() && !checkBoxTime.isChecked())
+			erreur =  "Vous devez choisir une date ou une localisation";
 		return erreur;
 	}
 
 	public void test(View view){
-    	Intent intent = new Intent(this, Main.class);
+    	Intent intent = new Intent(this, Localisation.class);
         //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
@@ -248,10 +268,12 @@ public class CreateSMS extends FragmentActivity{
     			if(checked){
     				buttonDate.setEnabled(true);
     				buttonTime.setEnabled(true);
+    				buttonCalendrier.setEnabled(true);
     				fragmentDate.ModifierButton();
     				fragmentTime.ModifierButton();
     			}
     			else{
+    				buttonCalendrier.setEnabled(false);
     				buttonDate.setEnabled(false);
     				buttonTime.setEnabled(false);
     				buttonDate.setText("JJ-MM-AAAA");
