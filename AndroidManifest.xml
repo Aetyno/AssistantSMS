@@ -91,6 +91,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service android:name="m2.ihm.assistantsms.service.ServiceEnvoieSMS"/>
     </application>
 
 </manifest>

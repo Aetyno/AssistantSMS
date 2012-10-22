@@ -60,6 +60,7 @@ public class MaBaseSMSGestion {
 		values.put(COL_MESSAGE, _message);
 		values.put(COL_CONTACT, _contact);
 		values.put(COL_LOCALISATION, _localisation);
+		values.put(COL_IS_SENT, 0);
 		if(_date==null){
 			values.put(COL_DATE,"null");
 		}
@@ -71,11 +72,12 @@ public class MaBaseSMSGestion {
 		return bdd.insert(TABLE_SMS, null, values);
 	}
 	
-	public int updateSMS(int _id, String _contact, Timestamp _date, String _localisation, String _message){
+	public int updateSMS(int _id, String _contact, Timestamp _date, String _localisation, String _message, int _is_send){
 		ContentValues values = new ContentValues();
 		values.put(COL_MESSAGE, _message);
 		values.put(COL_CONTACT, _contact);
 		values.put(COL_LOCALISATION, _localisation);
+		values.put(COL_IS_SENT, _is_send);
 		if(_date==null){
 			values.put(COL_DATE,"null");
 		}
@@ -148,7 +150,7 @@ public class MaBaseSMSGestion {
 			sms.setID(c.getInt(NUM_COL_ID));
 			sms.setIsSent(c.getInt(NUM_COL_IS_SENT));
 			listeSMS.add(sms);
-			
+			c.moveToNext();
 		}
 		
 		c.close();
@@ -180,6 +182,7 @@ public class MaBaseSMSGestion {
 			sms.setID(c.getInt(NUM_COL_ID));
 			sms.setIsSent(c.getInt(NUM_COL_IS_SENT));
 			listeSMS.add(sms);
+			c.moveToNext();
 			
 		}
 		
@@ -212,6 +215,7 @@ public class MaBaseSMSGestion {
 			sms.setID(c.getInt(NUM_COL_ID));
 			sms.setIsSent(c.getInt(NUM_COL_IS_SENT));
 			listeSMS.add(sms);
+			c.moveToNext();
 			
 		}
 		
@@ -246,6 +250,7 @@ public class MaBaseSMSGestion {
 			sms.setID(c.getInt(NUM_COL_ID));
 			sms.setIsSent(c.getInt(NUM_COL_IS_SENT));
 			listeSMS.add(sms);
+			c.moveToNext();
 			
 		}
 		
@@ -280,6 +285,7 @@ public class MaBaseSMSGestion {
 			sms.setID(c.getInt(NUM_COL_ID));
 			sms.setIsSent(c.getInt(NUM_COL_IS_SENT));
 			listeSMS.add(sms);
+			c.moveToNext();
 			
 		}
 		

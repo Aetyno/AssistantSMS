@@ -6,6 +6,7 @@ import java.util.Calendar;
 import resources.DatePickerFragment;
 import resources.TimePickerFragment;
 import m2.ihm.assistantsms.base_de_donnees.MaBaseSMSGestion;
+import m2.ihm.assistantsms.service.ServiceEnvoieSMS;
 
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,9 +14,10 @@ import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
 import android.support.v4.app.FragmentActivity;
 import android.annotation.SuppressLint;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.view.Menu;
@@ -50,7 +52,8 @@ public class CreateSMS extends FragmentActivity{
     final Context context = this;
 
 	private MaBaseSMSGestion  maBaseGestion= new MaBaseSMSGestion(this);
-
+	private AlarmManager alarmManager;
+	private PendingIntent pendingIntent;
     
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -149,6 +152,7 @@ public class CreateSMS extends FragmentActivity{
 							            				fragmentDate.getDay(),
 							            				fragmentTime.getHour(),
 							            				fragmentTime.getMinute(),0,0);
+	            		alarm(timestamp);
 	            	}
 	            	
 	            	if(checkBoxTime.isChecked() && checkBoxMap.isChecked()){
@@ -178,6 +182,7 @@ public class CreateSMS extends FragmentActivity{
 	            	
 	            	//((Model) Singleton.getModel()).addSMSListeSMS("Destinaire", new Date(), "localisation", "sms");
 	      
+	            	
 	            	toast = Toast.makeText(getApplicationContext(), "Message enregistré", Toast.LENGTH_SHORT);
 	            	toast.show();
 	            	
@@ -218,6 +223,22 @@ public class CreateSMS extends FragmentActivity{
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+    
+    private void alarm(Timestamp timestamp){
+    	alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+    	 Intent intent = new Intent(this, ServiceEnvoieSMS.class);
+    	 
+    	  PendingIntent pendingIntent = PendingIntent.getService(this, 0,
+    	    intent, PendingIntent.FLAG_ONE_SHOT);
+    	  
+    	  Calendar cal = Calendar.getInstance();
+  		  cal.set(Calendar.SECOND, 0);
+  		  cal.set(Calendar.MILLISECOND, 0);
+    	  alarmManager.set(AlarmManager.RTC_WAKEUP,
+    	    System.currentTimeMillis() + (timestamp.getTime()-cal.getTimeInMillis()), pendingIntent);
+    	
+    	Toast.makeText(this, "Alarm set ", Toast.LENGTH_LONG).show();
     }
     
     private String repectCondition() {

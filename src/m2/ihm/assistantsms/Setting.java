@@ -20,7 +20,7 @@ public class Setting extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
-        serviceSendSMS = new Intent(this, ServiceSendSMS.class);
+        //serviceSendSMS = new Intent(this, ServiceSendSMS.class);
         
         maBaseSettingsGestion = new MaBaseSettingsGestion(this);
         

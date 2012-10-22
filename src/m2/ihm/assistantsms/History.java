@@ -7,6 +7,7 @@ import resources.SMS;
 import m2.ihm.assistantsms.adapter.SMSAdapter;
 import m2.ihm.assistantsms.base_de_donnees.MaBaseSMSGestion;
 import android.os.Bundle;
+import android.annotation.SuppressLint;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.view.Menu;
@@ -15,12 +16,13 @@ import android.view.View;
 
 public class History extends ListActivity {
 
-    @Override
+    @SuppressLint("NewApi")
+	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         MaBaseSMSGestion maBaseGestion = new MaBaseSMSGestion(this);
         maBaseGestion.open();
-        List<SMS> listSMS = maBaseGestion.getAllSMS();
+        List<SMS> listSMS = maBaseGestion.getAllSMSSent();
         maBaseGestion.close();
         SMSAdapter adapter = new SMSAdapter(this, listSMS);
         setListAdapter(adapter);

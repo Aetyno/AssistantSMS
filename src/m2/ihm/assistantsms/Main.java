@@ -20,9 +20,9 @@ public class Main extends ListActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         MaBaseSMSGestion maBaseGestion = new MaBaseSMSGestion(this);
-        
+                
         maBaseGestion.open();
-        listeSMS = maBaseGestion.getAllSMS();
+        listeSMS = maBaseGestion.getAllSMSPrepared();
         maBaseGestion.close();
         SMSAdapter adapter = new SMSAdapter(this, listeSMS);
         setListAdapter(adapter);

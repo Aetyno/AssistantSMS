@@ -43,7 +43,7 @@ public class HistoryGeo extends MapActivity {
 		MaBaseSMSGestion maBaseGestion = new MaBaseSMSGestion(this);    
     	geocoder = new Geocoder(this);     
         maBaseGestion.open();
-        listeSMS = maBaseGestion.getAllSMS();
+        listeSMS = maBaseGestion.getAllSMSSent();
         maBaseGestion.close();
         
         getActionBar().setDisplayHomeAsUpEnabled(true);

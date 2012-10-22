@@ -15,6 +15,7 @@ import com.google.android.maps.OverlayItem;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.view.Menu;
@@ -22,6 +23,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.EditText;
+
 
 public class Localisation extends MapActivity implements OnTouchListener {
 
@@ -31,12 +33,14 @@ public class Localisation extends MapActivity implements OnTouchListener {
 	private ListItimizedOverlay itemizedoverlay;
 	private MapController mc;
 	
-    @Override
+    @SuppressLint("NewApi")
+	@Override
     public void onCreate(Bundle savedInstanceState) {
     	
 
     	geocoder = new Geocoder(this);
         super.onCreate(savedInstanceState);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_localisation);
         
         mapView = (MapView) this.findViewById(R.id.mapViewLocalisation);
