@@ -30,5 +30,7 @@
     <string name="time">HH:MM</string>
     <string name="title_activity_localisation">Localisation</string>
     <string name="rechercheMap">Recherche Map</string>
+    <string name="service">Service</string>
+    <string name="notification">Notification</string>
 
 </resources>

@@ -42,7 +42,7 @@ public class MaBaseSettingsGestion {
 		Cursor c = bdd.query(
 				TABLE_SETTINGS, 
 				new String[] {COL_NAME, COL_VALUE},
-				COL_NAME + " LIKE " + "service",
+				COL_NAME + " = " + " 'service' ",
 				null,null,null,null);
 		
 		if(c.getCount()==0){
@@ -63,7 +63,7 @@ public class MaBaseSettingsGestion {
 		Cursor c =bdd.query(
 				TABLE_SETTINGS, 
 				new String[] {COL_NAME, COL_VALUE}, 
-				COL_NAME + " = " + "notification",
+				COL_NAME + " = " + " 'notification' ",
 				null,null,null,null); 
 		
 		if(c.getCount()==0){
@@ -89,19 +89,19 @@ public class MaBaseSettingsGestion {
 			values.put(COL_VALUE, 0);
 		}
 		
-		return bdd.update(TABLE_SETTINGS,values, COL_NAME + " =  service", null);
+		return bdd.update(TABLE_SETTINGS, values, COL_NAME + " =  'service' ", null);
 	}
 	
 	public int setNotification(boolean _notification){
 		ContentValues values = new ContentValues();
 		
 		if(_notification){
-			values.put(COL_VALUE, 1);
+			values.put(COL_VALUE, "1");
 		}
 		else{
-			values.put(COL_VALUE, 0);
+			values.put(COL_VALUE, "0");
 		}
 		
-		return bdd.update(TABLE_SETTINGS,values, COL_NAME + " =  notification", null);
+		return bdd.update(TABLE_SETTINGS,values, COL_NAME + " =  'notification' ", null);
 	}	
 }
