@@ -6,7 +6,7 @@ import java.util.Locale;
 
 import resources.SMS;
 import resources.ListItimizedOverlay;
-import m2.ihm.assistantsms.base_de_donnees.MaBaseGestion;
+import m2.ihm.assistantsms.base_de_donnees.MaBaseSMSGestion;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
@@ -39,7 +39,7 @@ public class HistoryGeo extends MapActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
-		MaBaseGestion maBaseGestion = new MaBaseGestion(this);        
+		MaBaseSMSGestion maBaseGestion = new MaBaseSMSGestion(this);        
         maBaseGestion.open();
         listeSMS = maBaseGestion.getAllSMS();
         maBaseGestion.close();

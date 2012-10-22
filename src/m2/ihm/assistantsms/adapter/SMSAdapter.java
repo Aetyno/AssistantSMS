@@ -55,7 +55,12 @@ public class SMSAdapter extends BaseAdapter  {
 		  TextView sms = (TextView)layoutItem.findViewById(R.id.sms);
 		        
 		  destinataire.setText(listSMS.get(position).getDestinataire());
-		  date.setText(listSMS.get(position).getDate().toString());
+		  if(listSMS.get(position).getDate() == null){
+			  date.setText("null");
+		  }
+		  else{
+			  date.setText(listSMS.get(position).getDate().toString());
+		  }
 		  localisation.setText(listSMS.get(position).getLocalisation());
 		  sms.setText(listSMS.get(position).getMessage());
 		  

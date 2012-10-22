@@ -10,9 +10,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.Cursor;
 import java.util.List;
 
-public class MaBaseGestion {
+public class MaBaseSMSGestion {
 	
-	private static final int VERSION_BDD = 2;
+	private static final int VERSION_BDD = 1;
 	
 	private static final String TABLE_SMS = "table_sms";
 	
@@ -37,10 +37,10 @@ public class MaBaseGestion {
 	
 	
 	private SQLiteDatabase bdd;
-	private MaBase maBase;
+	private MaBaseSMS maBase;
 	
-	public MaBaseGestion(Context _context){
-		maBase = new MaBase(_context, TABLE_SMS, null, VERSION_BDD);
+	public MaBaseSMSGestion(Context _context){
+		maBase = new MaBaseSMS(_context, TABLE_SMS, null, VERSION_BDD);
 	}
 	
 	public void open(){
@@ -60,7 +60,13 @@ public class MaBaseGestion {
 		values.put(COL_MESSAGE, _message);
 		values.put(COL_CONTACT, _contact);
 		values.put(COL_LOCALISATION, _localisation);
-		values.put(COL_DATE, _date.toString());
+		if(_date==null){
+			values.put(COL_DATE,"null");
+		}
+		else{
+			values.put(COL_DATE, _date.toString());
+		}
+		
 		
 		return bdd.insert(TABLE_SMS, null, values);
 	}
@@ -70,7 +76,12 @@ public class MaBaseGestion {
 		values.put(COL_MESSAGE, _message);
 		values.put(COL_CONTACT, _contact);
 		values.put(COL_LOCALISATION, _localisation);
-		values.put(COL_DATE, _date.toString());
+		if(_date==null){
+			values.put(COL_DATE,"null");
+		}
+		else{
+			values.put(COL_DATE, _date.toString());
+		}
 		
 		return bdd.update(TABLE_SMS, values, COL_ID + "=" + _id, null);
 	}
@@ -79,10 +90,12 @@ public class MaBaseGestion {
 		return bdd.delete(TABLE_SMS, COL_ID + "=" + _id, null);
 	}
 	
-	/*public SMS getSMS(int _id){
+	public SMS getSMS(int _id){
 		Cursor c =bdd.query(
 				TABLE_SMS, 
-				new String[] {COL_ID, COL_MESSAGE, COL_CONTACT, COL_LOCALISATION, COL_DATE, COL_IS_SENT}, COL_ID + "LIKE \"" + _id +"\"",null,null,null,null); 
+				new String[] {COL_ID, COL_MESSAGE, COL_CONTACT, COL_LOCALISATION, COL_DATE, COL_IS_SENT}, 
+				COL_ID + " = " + _id,
+				null,null,null,null); 
 	
 		if(c.getCount()==0){
 			return null;
@@ -92,7 +105,15 @@ public class MaBaseGestion {
 		
 		SMS sms = new SMS();
 		sms.setMessage(c.getString(NUM_COL_MESSAGE));
-		sms.setDateString(c.getString(NUM_COL_DATE));
+		
+		if(c.getString(NUM_COL_DATE).equals("null")){
+			sms.setDate(null);
+		}
+		else{
+			sms.setDate(Timestamp.valueOf(c.getString(NUM_COL_DATE)));
+		}
+		
+		
 		sms.setDestinataire(c.getString(NUM_COL_CONTACT));
 		sms.setLocalisation(c.getString(NUM_COL_LOCALISATION));
 		sms.setID(c.getInt(NUM_COL_ID));
@@ -102,7 +123,7 @@ public class MaBaseGestion {
 		
 		return sms;
 		
-	}*/
+	}
 	
 	public List<SMS> getAllSMS(){
 		List<SMS> listeSMS = new ArrayList<SMS>();
@@ -113,7 +134,12 @@ public class MaBaseGestion {
 		for(int i=0;i<nbMessage;i++){
 			sms = new SMS();
 			sms.setMessage(c.getString(NUM_COL_MESSAGE));
-			sms.setDate(Timestamp.valueOf(c.getString(NUM_COL_DATE)));
+			if(c.getString(NUM_COL_DATE).equals("null")){
+				sms.setDate(null);
+			}
+			else{
+				sms.setDate(Timestamp.valueOf(c.getString(NUM_COL_DATE)));
+			}
 			sms.setDestinataire(c.getString(NUM_COL_CONTACT));
 			sms.setLocalisation(c.getString(NUM_COL_LOCALISATION));
 			sms.setID(c.getInt(NUM_COL_ID));
@@ -122,6 +148,65 @@ public class MaBaseGestion {
 			
 		}
 		
+		c.close();
+		
 		return listeSMS;
 	}
+	
+	public List<SMS> getAllSMSPrepared(){
+		List<SMS> listeSMS = new ArrayList<SMS>();
+		Cursor c = bdd.query(TABLE_SMS, new String[] {COL_ID, COL_MESSAGE, COL_CONTACT, COL_LOCALISATION, COL_DATE, COL_IS_SENT},COL_IS_SENT + "=" + 0,null,null,null,null);
+		SMS sms;
+		int nbMessage = c.getCount();
+		c.moveToFirst();
+		for(int i=0;i<nbMessage;i++){
+			sms = new SMS();
+			sms.setMessage(c.getString(NUM_COL_MESSAGE));
+			if(c.getString(NUM_COL_DATE).equals("null")){
+				sms.setDate(null);
+			}
+			else{
+				sms.setDate(Timestamp.valueOf(c.getString(NUM_COL_DATE)));
+			}
+			sms.setDestinataire(c.getString(NUM_COL_CONTACT));
+			sms.setLocalisation(c.getString(NUM_COL_LOCALISATION));
+			sms.setID(c.getInt(NUM_COL_ID));
+			sms.setIsSent(c.getInt(NUM_COL_IS_SENT));
+			listeSMS.add(sms);
+			
+		}
+		
+		c.close();
+		
+		return listeSMS;
+	}
+	
+	public List<SMS> getAllSMSSent(){
+		List<SMS> listeSMS = new ArrayList<SMS>();
+		Cursor c = bdd.query(TABLE_SMS, new String[] {COL_ID, COL_MESSAGE, COL_CONTACT, COL_LOCALISATION, COL_DATE, COL_IS_SENT}, COL_IS_SENT + "!=" + 0,null,null,null,null);
+		SMS sms;
+		int nbMessage = c.getCount();
+		c.moveToFirst();
+		for(int i=0;i<nbMessage;i++){
+			sms = new SMS();
+			sms.setMessage(c.getString(NUM_COL_MESSAGE));
+			if(c.getString(NUM_COL_DATE).equals("null")){
+				sms.setDate(null);
+			}
+			else{
+				sms.setDate(Timestamp.valueOf(c.getString(NUM_COL_DATE)));
+			}
+			sms.setDestinataire(c.getString(NUM_COL_CONTACT));
+			sms.setLocalisation(c.getString(NUM_COL_LOCALISATION));
+			sms.setID(c.getInt(NUM_COL_ID));
+			sms.setIsSent(c.getInt(NUM_COL_IS_SENT));
+			listeSMS.add(sms);
+			
+		}
+		
+		c.close();
+		
+		return listeSMS;
+	}
+
 }
