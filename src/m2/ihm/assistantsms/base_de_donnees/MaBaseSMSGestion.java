@@ -127,7 +127,10 @@ public class MaBaseSMSGestion {
 	
 	public List<SMS> getAllSMS(){
 		List<SMS> listeSMS = new ArrayList<SMS>();
-		Cursor c = bdd.query(TABLE_SMS, new String[] {COL_ID, COL_MESSAGE, COL_CONTACT, COL_LOCALISATION, COL_DATE, COL_IS_SENT},null,null,null,null,null);
+		Cursor c = bdd.query(
+				TABLE_SMS, 
+				new String[] {COL_ID, COL_MESSAGE, COL_CONTACT, COL_LOCALISATION, COL_DATE, COL_IS_SENT},
+				null,null,null,null,null);
 		SMS sms;
 		int nbMessage = c.getCount();
 		c.moveToFirst();
@@ -155,7 +158,11 @@ public class MaBaseSMSGestion {
 	
 	public List<SMS> getAllSMSPrepared(){
 		List<SMS> listeSMS = new ArrayList<SMS>();
-		Cursor c = bdd.query(TABLE_SMS, new String[] {COL_ID, COL_MESSAGE, COL_CONTACT, COL_LOCALISATION, COL_DATE, COL_IS_SENT},COL_IS_SENT + "=" + 0,null,null,null,null);
+		Cursor c = bdd.query(
+				TABLE_SMS, 
+				new String[] {COL_ID, COL_MESSAGE, COL_CONTACT, COL_LOCALISATION, COL_DATE, COL_IS_SENT},
+				COL_IS_SENT + "=" + 0,
+				null,null,null,null);
 		SMS sms;
 		int nbMessage = c.getCount();
 		c.moveToFirst();
@@ -183,8 +190,80 @@ public class MaBaseSMSGestion {
 	
 	public List<SMS> getAllSMSSent(){
 		List<SMS> listeSMS = new ArrayList<SMS>();
-		Cursor c = bdd.query(TABLE_SMS, new String[] {COL_ID, COL_MESSAGE, COL_CONTACT, COL_LOCALISATION, COL_DATE, COL_IS_SENT}, COL_IS_SENT + "!=" + 0,null,null,null,null);
+		Cursor c = bdd.query(
+				TABLE_SMS, 
+				new String[] {COL_ID, COL_MESSAGE, COL_CONTACT, COL_LOCALISATION, COL_DATE, COL_IS_SENT}, 
+				COL_IS_SENT + "!=" + 0,null,null,null,null);
+		
 		SMS sms;
+		int nbMessage = c.getCount();
+		c.moveToFirst();
+		for(int i=0;i<nbMessage;i++){
+			sms = new SMS();
+			sms.setMessage(c.getString(NUM_COL_MESSAGE));
+			if(c.getString(NUM_COL_DATE).equals("null")){
+				sms.setDate(null);
+			}
+			else{
+				sms.setDate(Timestamp.valueOf(c.getString(NUM_COL_DATE)));
+			}
+			sms.setDestinataire(c.getString(NUM_COL_CONTACT));
+			sms.setLocalisation(c.getString(NUM_COL_LOCALISATION));
+			sms.setID(c.getInt(NUM_COL_ID));
+			sms.setIsSent(c.getInt(NUM_COL_IS_SENT));
+			listeSMS.add(sms);
+			
+		}
+		
+		c.close();
+		
+		return listeSMS;
+	}
+	
+	public List<SMS> getAllSMSTimestamp(Timestamp _date){
+		List<SMS> listeSMS = new ArrayList<SMS>();
+		SMS sms;
+		Cursor c = bdd.query(
+				TABLE_SMS, 
+				new String[] {COL_ID, COL_MESSAGE, COL_CONTACT, COL_LOCALISATION, COL_DATE, COL_IS_SENT}, 
+				COL_DATE + "=" + _date.toString(),
+				null, null, null, null);
+		
+		
+		int nbMessage = c.getCount();
+		c.moveToFirst();
+		for(int i=0;i<nbMessage;i++){
+			sms = new SMS();
+			sms.setMessage(c.getString(NUM_COL_MESSAGE));
+			if(c.getString(NUM_COL_DATE).equals("null")){
+				sms.setDate(null);
+			}
+			else{
+				sms.setDate(Timestamp.valueOf(c.getString(NUM_COL_DATE)));
+			}
+			sms.setDestinataire(c.getString(NUM_COL_CONTACT));
+			sms.setLocalisation(c.getString(NUM_COL_LOCALISATION));
+			sms.setID(c.getInt(NUM_COL_ID));
+			sms.setIsSent(c.getInt(NUM_COL_IS_SENT));
+			listeSMS.add(sms);
+			
+		}
+		
+		c.close();
+		
+		return listeSMS;
+	}
+	
+	public List<SMS> getAllSMSLocalisation(String _localisation){
+		List<SMS> listeSMS = new ArrayList<SMS>();
+		SMS sms;
+		Cursor c = bdd.query(
+				TABLE_SMS, 
+				new String[] {COL_ID, COL_MESSAGE, COL_CONTACT, COL_LOCALISATION, COL_DATE, COL_IS_SENT}, 
+				COL_LOCALISATION + "=" + _localisation,
+				null, null, null, null);
+		
+		
 		int nbMessage = c.getCount();
 		c.moveToFirst();
 		for(int i=0;i<nbMessage;i++){
