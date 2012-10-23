@@ -129,10 +129,6 @@ public class CreateSMS extends FragmentActivity{
     	
     	switch (item.getItemId()) {
             case android.R.id.home:
-                // app icon in action bar clicked; go home
-                //intent = new Intent(this, Main.class);
-                //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                //startActivity(intent);
             	Intent parentActivityIntent = new Intent(this, Main.class);
                 parentActivityIntent.addFlags(
                         Intent.FLAG_ACTIVITY_CLEAR_TOP |
@@ -152,7 +148,7 @@ public class CreateSMS extends FragmentActivity{
 							            				fragmentDate.getDay(),
 							            				fragmentTime.getHour(),
 							            				fragmentTime.getMinute(),0,0);
-	            		alarm(timestamp);
+	            		addAlarmDate(timestamp);
 	            	}
 	            	
 	            	if(checkBoxTime.isChecked() && checkBoxMap.isChecked()){
@@ -207,7 +203,8 @@ public class CreateSMS extends FragmentActivity{
              
             				// show it
             				alertDialog.show();
-            			}
+            	}
+            	finish();
             	return true;
             	
             case R.id.menu_cancel:
@@ -218,6 +215,7 @@ public class CreateSMS extends FragmentActivity{
             	intent = new Intent(this, Main.class);
                 //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                finish();
             	return true;
             	
             default:
@@ -225,10 +223,13 @@ public class CreateSMS extends FragmentActivity{
         }
     }
     
-    private void alarm(Timestamp timestamp){
+    private void addAlarmDate(Timestamp timestamp){
     	alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
     	 Intent intent = new Intent(this, ServiceEnvoieSMS.class);
-    	 
+    	  Bundle n = new Bundle();
+    	  n.putString("Key", "date");
+    	  intent.putExtras(n);
+
     	  PendingIntent pendingIntent = PendingIntent.getService(this, 0,
     	    intent, PendingIntent.FLAG_ONE_SHOT);
     	  
@@ -236,7 +237,7 @@ public class CreateSMS extends FragmentActivity{
   		  cal.set(Calendar.SECOND, 0);
   		  cal.set(Calendar.MILLISECOND, 0);
     	  alarmManager.set(AlarmManager.RTC_WAKEUP,
-    	    System.currentTimeMillis() + (timestamp.getTime()-cal.getTimeInMillis()), pendingIntent);
+    	    timestamp.getTime(), pendingIntent);
     	
     	Toast.makeText(this, "Alarm set ", Toast.LENGTH_LONG).show();
     }

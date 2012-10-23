@@ -26,6 +26,7 @@ public class Main extends ListActivity {
         maBaseGestion.close();
         SMSAdapter adapter = new SMSAdapter(this, listeSMS);
         setListAdapter(adapter);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -38,27 +39,36 @@ public class Main extends ListActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
     	Intent intent;
     	switch (item.getItemId()) {
+	    	case android.R.id.home:
+	            finish();
+	            return true;
+          
             case R.id.menu_create_sms:
                 // app icon in action bar clicked; go home
                 intent = new Intent(this, CreateSMS.class);
                 //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
+                finish();
                 return true;
             case R.id.menu_history:
             	intent = new Intent(this, History.class);
                 startActivity(intent);
+                finish();
             	return true;
             case R.id.menu_history_geo:
             	intent = new Intent(this, HistoryGeo.class);
                 startActivity(intent);
+                finish();
             	return true;
             case R.id.menu_settings:
             	intent = new Intent(this, Setting.class);
                 startActivity(intent);
+                finish();
             	return true;
             case R.id.menu_about:
             	intent = new Intent(this, About.class);
                 startActivity(intent);
+                finish();
             	return true;
             default:
                 return super.onOptionsItemSelected(item);

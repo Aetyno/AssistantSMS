@@ -62,9 +62,9 @@ public class HistoryGeo extends MapActivity {
  		double longitude =1.4367727;
  		location = new GeoPoint((int) (latitude * 1000000.0),(int) (longitude * 1000000.0));
     			
-		if(listeSMS.size() > 0)
 			for(SMS sms:listeSMS)
-	 			AjoutMarqueur(sms);
+				if(!sms.getLocalisation().equals(""))
+					AjoutMarqueur(sms);
 		List<Overlay> mapOverlays = mapView.getOverlays();
 		mapOverlays.add(itemizedoverlay);
 		
