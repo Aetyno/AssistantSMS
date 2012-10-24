@@ -219,7 +219,7 @@ public class MaBaseSMSGestion {
 			sms.setIsSent(_c.getInt(NUM_COL_IS_SENT));
 			listeSMS.add(sms);
                     }
-                    while(_c.moveToNext());
+                    while(_c.moveToPrevious());
                 }
             return listeSMS;
         }
