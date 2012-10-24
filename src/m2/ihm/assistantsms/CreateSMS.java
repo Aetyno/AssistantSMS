@@ -111,7 +111,10 @@ public class CreateSMS extends FragmentActivity{
 
                 int column = cursor.getColumnIndex(Phone.NUMBER);
                 String number = cursor.getString(column);
-                editTextContact.setText(number);
+                if(editTextContact.getText().equals(("")))
+                	editTextContact.setText(editTextContact.getText()+";"+number);
+                else
+                	editTextContact.setText(number);
             }
         }
     }
@@ -148,7 +151,7 @@ public class CreateSMS extends FragmentActivity{
 							            				fragmentDate.getDay(),
 							            				fragmentTime.getHour(),
 							            				fragmentTime.getMinute(),0,0);
-	            		addAlarmDate(timestamp);
+	            		
 	            	}
 	            	
 	            	if(checkBoxTime.isChecked() && checkBoxMap.isChecked()){
@@ -157,6 +160,8 @@ public class CreateSMS extends FragmentActivity{
 		            			timestamp,
 		            			editTextLocalisation.getText().toString(), 
 		            			editTextSMS.getText().toString());
+	            				addAlarmDate(timestamp);
+	            				addAlarmLocalisation(editTextLocalisation.getText().toString());
             	
 	            	}
 	            	else if(checkBoxTime.isChecked()){
@@ -165,6 +170,7 @@ public class CreateSMS extends FragmentActivity{
 		            			timestamp,
 		            			"null", 
 		            			editTextSMS.getText().toString());
+	            				addAlarmDate(timestamp);
 	            	}
 	            	else{
 	            		maBaseGestion.insertSMS(
@@ -172,7 +178,8 @@ public class CreateSMS extends FragmentActivity{
 	            			null,
 	            			editTextLocalisation.getText().toString(), 
 	            			editTextSMS.getText().toString());
-	         
+        					addAlarmLocalisation(editTextLocalisation.getText().toString());
+                    	         
 	            	}
 	            	maBaseGestion.close();
 	            	
@@ -184,7 +191,6 @@ public class CreateSMS extends FragmentActivity{
 	            	
 	            	intent = new Intent(this, Main.class);
 	                //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-	            	this.finish();
 	                startActivity(intent);
             	}
             	else{
@@ -223,7 +229,12 @@ public class CreateSMS extends FragmentActivity{
         }
     }
     
-    private void addAlarmDate(Timestamp timestamp){
+    private void addAlarmLocalisation(String localisation) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void addAlarmDate(Timestamp timestamp){
     	alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
     	 Intent intent = new Intent(this, ServiceEnvoieSMS.class);
     	  Bundle n = new Bundle();
@@ -238,8 +249,6 @@ public class CreateSMS extends FragmentActivity{
   		  cal.set(Calendar.MILLISECOND, 0);
     	  alarmManager.set(AlarmManager.RTC_WAKEUP,
     	    timestamp.getTime(), pendingIntent);
-    	
-    	Toast.makeText(this, "Alarm set ", Toast.LENGTH_LONG).show();
     }
     
     private String repectCondition() {

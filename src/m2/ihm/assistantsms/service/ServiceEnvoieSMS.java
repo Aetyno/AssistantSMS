@@ -76,8 +76,11 @@ public class ServiceEnvoieSMS extends Service {
 
 		for(SMS sms:listeSMS){
 			if(sms.getDate().equals(time)){
-				sendSMS(sms.getDestinataire(), sms.getMessage());
-				maBaseGestion.updateSMS(sms.getID(),
+				String destinataire[] = sms.getDestinataire().split(";");
+				for(int i = 0; i < destinataire.length; i++){
+					sendSMS(destinataire[i], sms.getMessage());
+				Toast.makeText(getApplicationContext(), "envoie mess a "+destinataire[i], Toast.LENGTH_SHORT).show();
+				}maBaseGestion.updateSMS(sms.getID(),
 										sms.getDestinataire(),
 										sms.getDate(),
 										sms.getLocalisation(),
@@ -90,6 +93,7 @@ public class ServiceEnvoieSMS extends Service {
 			        createNotify(sms);
 		        }
 		    	maBaseSettingsGestion.close();
+		    	
 			}
 		}
 	}
@@ -112,9 +116,15 @@ public class ServiceEnvoieSMS extends Service {
     	
     	    mNotifyBuilder.setContentText("")
     	        .setNumber(numMessages);
-    	    mNotificationManager.notify(
-    	    		ID_NOTIFICATION,
-    	            mNotifyBuilder.build());
+
+	    Intent resultIntent = new Intent(this, History.class);
+	    TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+		stackBuilder.addParentStack(History.class);
+		stackBuilder.addNextIntent(resultIntent);
+		PendingIntent resultPendingIntent =
+			        stackBuilder.getPendingIntent( 0, PendingIntent.FLAG_UPDATE_CURRENT);
+	 	mNotifyBuilder.setContentIntent(resultPendingIntent);
+	    mNotificationManager.notify(ID_NOTIFICATION, mNotifyBuilder.build());
     }
 	@Override
 	public IBinder onBind(Intent arg0) {
@@ -136,7 +146,6 @@ public class ServiceEnvoieSMS extends Service {
     	maBaseSettingsGestion.close();
 	}
 	public static void initNBMess(){
-		
 		numMessages = 0;
 	}
 	

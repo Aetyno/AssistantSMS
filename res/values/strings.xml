@@ -32,5 +32,7 @@
     <string name="rechercheMap">Recherche Map</string>
     <string name="service">Service</string>
     <string name="notification">Notification</string>
+    <string name="aucunSMS">Aucun SMS enregistrer</string>
+    <string name="title_activity_main_activitytt">MainActivitytt</string>
 
 </resources>

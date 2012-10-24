@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 
 public class Main extends ListActivity {
 	private List<SMS> listeSMS;
@@ -23,9 +24,9 @@ public class Main extends ListActivity {
                 
         maBaseGestion.open();
         listeSMS = maBaseGestion.getAllSMSPrepared();
-        maBaseGestion.close();
-        SMSAdapter adapter = new SMSAdapter(this, listeSMS);
-        setListAdapter(adapter);
+        	maBaseGestion.close();
+            SMSAdapter adapter = new SMSAdapter(this, listeSMS);
+            setListAdapter(adapter);
         getActionBar().setDisplayHomeAsUpEnabled(true);
     }
 

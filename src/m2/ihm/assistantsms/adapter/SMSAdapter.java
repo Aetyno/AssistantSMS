@@ -26,6 +26,7 @@ public class SMSAdapter extends BaseAdapter  {
 		  this.context = context;
 		  this.listSMS = aListP;
 		  this.inflater = LayoutInflater.from(this.context);
+		  
 	}
 	
 	public int getCount() {
@@ -43,8 +44,8 @@ public class SMSAdapter extends BaseAdapter  {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		// TODO Auto-generated method stub
 		 LinearLayout layoutItem;
-		  if (convertView == null) {
-		    layoutItem = (LinearLayout) inflater.inflate(R.layout.sms_layout, parent, false);
+		   if (convertView == null) {
+		        layoutItem = (LinearLayout) inflater.inflate(R.layout.sms_layout, parent, false);
 		  } else {
 		  	layoutItem = (LinearLayout) convertView;
 		  }
