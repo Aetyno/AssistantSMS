@@ -53,7 +53,6 @@ public class CreateSMS extends FragmentActivity{
 
 	private MaBaseSMSGestion  maBaseGestion= new MaBaseSMSGestion(this);
 	private AlarmManager alarmManager;
-	private PendingIntent pendingIntent;
     
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -114,9 +113,9 @@ public class CreateSMS extends FragmentActivity{
                 int column = cursor.getColumnIndex(Phone.NUMBER);
                 String number = cursor.getString(column);
                 if(editTextContact.getText().equals(("")))
-                	editTextContact.setText(number + "; ");
+                	editTextContact.setText(number + ", ");
                 else
-                	editTextContact.setText(editTextContact.getText() + number + "; ");
+                	editTextContact.setText(editTextContact.getText() + number + ", ");
             }
         }
     }
@@ -290,7 +289,7 @@ public class CreateSMS extends FragmentActivity{
     			if(checked){
     				buttonMap.setEnabled(true);
     				editTextLocalisation.setEnabled(true);
-    				editTextLocalisation.setText("");
+    				//editTextLocalisation.setText("");
     			}
     			else{
     				buttonMap.setEnabled(false);
