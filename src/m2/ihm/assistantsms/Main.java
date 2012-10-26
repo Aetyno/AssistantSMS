@@ -43,8 +43,8 @@ public class Main extends ListActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
     	Intent intent;
     	switch (item.getItemId()) {
-	    	case android.R.id.home:
-	            finish();
+	    	case R.id.menu_refresh:
+	            onRestart();
 	            return true;
           
             case R.id.menu_create_sms:
