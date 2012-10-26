@@ -40,7 +40,7 @@ public class CreateSMS extends FragmentActivity{
 	private Button buttonTime = null;
 	
 	private ImageButton buttonMap = null;	
-	private ImageButton buttonCalendrier = null;	
+	//private ImageButton buttonCalendrier = null;	
 	
 	private CheckBox checkBoxTime = null;
 	private CheckBox checkBoxMap = null;
@@ -73,7 +73,7 @@ public class CreateSMS extends FragmentActivity{
 		buttonDate = (Button)findViewById(R.id.picker_date);
 		buttonTime = (Button)findViewById(R.id.picker_time);
 
-		buttonCalendrier = (ImageButton)findViewById(R.id.button_calendar);
+		//buttonCalendrier = (ImageButton)findViewById(R.id.button_calendar);
 		buttonMap = (ImageButton)findViewById(R.id.button_map);
 		buttonMap.setEnabled(false);
 		editTextLocalisation.setEnabled(false);
@@ -301,16 +301,16 @@ public class CreateSMS extends FragmentActivity{
     			if(checked){
     				buttonDate.setEnabled(true);
     				buttonTime.setEnabled(true);
-    				buttonCalendrier.setEnabled(true);
+    				//buttonCalendrier.setEnabled(true);
     				fragmentDate.ModifierButton();
     				fragmentTime.ModifierButton();
     			}
     			else{
-    				buttonCalendrier.setEnabled(false);
+    				//buttonCalendrier.setEnabled(false);
     				buttonDate.setEnabled(false);
     				buttonTime.setEnabled(false);
-    				buttonDate.setText("JJ-MM-AAAA");
-    				buttonTime.setText("HH:MM");
+    				//buttonDate.setText("JJ-MM-AAAA");
+    				//buttonTime.setText("HH:MM");
     			}
     	}
     }
