@@ -67,19 +67,22 @@ public class CreateSMS extends FragmentActivity{
     private void init(){
 
         editTextContact = (EditText) findViewById(R.id.editTextContact);
+        editTextContact.setText("");
         editTextLocalisation = (EditText) findViewById(R.id.editTextLocalisation);
+        editTextLocalisation.setText("");
+        editTextLocalisation.setEnabled(false);
         editTextSMS = (EditText) findViewById(R.id.editTextSMS);
-		buttonDate = (Button)findViewById(R.id.picker_date);
+        editTextSMS.setText("");
+		
+        buttonDate = (Button)findViewById(R.id.picker_date);
 		buttonTime = (Button)findViewById(R.id.picker_time);
 
-		//buttonCalendrier = (ImageButton)findViewById(R.id.button_calendar);
 		buttonMap = (ImageButton)findViewById(R.id.button_map);
 		buttonMap.setEnabled(false);
-		editTextLocalisation.setEnabled(false);
+		
 		
         checkBoxTime = (CheckBox) findViewById(R.id.checkbox_time);
         checkBoxTime.setChecked(true);
-        
         checkBoxMap= (CheckBox) findViewById(R.id.checkbox_map);
         
         
@@ -88,7 +91,9 @@ public class CreateSMS extends FragmentActivity{
     	fragmentTime.ModifierButton();
 		fragmentDate.ModifierButton();
 		
-		editTextContact.setText("");
+		
+		
+		
     }
 	
 	
@@ -138,12 +143,11 @@ public class CreateSMS extends FragmentActivity{
                         Intent.FLAG_ACTIVITY_CLEAR_TOP |
                         Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(parentActivityIntent);
-                finish();
+                //finish();
                 return true;
                 
             case R.id.menu_accept:
-            	String error = repectCondition();
-            	if(error == null){
+            	if(repectCondition()){
 	            	maBaseGestion.open();
 	            	Timestamp timestamp = null;
 	            	if(checkBoxTime.isChecked()){
@@ -152,9 +156,7 @@ public class CreateSMS extends FragmentActivity{
 							            				fragmentDate.getDay(),
 							            				fragmentTime.getHour(),
 							            				fragmentTime.getMinute(),0,0);
-	            		
 	            	}
-	            	
 	            	if(checkBoxTime.isChecked() && checkBoxMap.isChecked()){
 	            		maBaseGestion.insertSMS(
 		            			editTextContact.getText().toString(), 
@@ -165,23 +167,25 @@ public class CreateSMS extends FragmentActivity{
 	            				addAlarmLocalisation(editTextLocalisation.getText().toString());
             	
 	            	}
-	            	else if(checkBoxTime.isChecked()){
-	            		maBaseGestion.insertSMS(
+	            	else{ 
+	            		if(checkBoxTime.isChecked()){
+		            		maBaseGestion.insertSMS(
+			            			editTextContact.getText().toString(), 
+			            			timestamp,
+			            			"null", 
+			            			editTextSMS.getText().toString());
+		            				addAlarmDate(timestamp);
+		            	}
+		            	else{
+		            		maBaseGestion.insertSMS(
 		            			editTextContact.getText().toString(), 
-		            			timestamp,
-		            			"null", 
+		            			null,
+		            			editTextLocalisation.getText().toString(), 
 		            			editTextSMS.getText().toString());
-	            				addAlarmDate(timestamp);
+	        					addAlarmLocalisation(editTextLocalisation.getText().toString()); 
+		            	}
 	            	}
-	            	else{
-	            		maBaseGestion.insertSMS(
-	            			editTextContact.getText().toString(), 
-	            			null,
-	            			editTextLocalisation.getText().toString(), 
-	            			editTextSMS.getText().toString());
-        					addAlarmLocalisation(editTextLocalisation.getText().toString());
-                    	         
-	            	}
+	            	
 	            	maBaseGestion.close();
 	            	
 	            	//((Model) Singleton.getModel()).addSMSListeSMS("Destinaire", new Date(), "localisation", "sms");
@@ -193,25 +197,10 @@ public class CreateSMS extends FragmentActivity{
 	            	intent = new Intent(this, Main.class);
 	                //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 	                startActivity(intent);
+	                
+	                //finish();
             	}
-            	else{
-            		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-              			// set title
-            			alertDialogBuilder.setTitle("Erreur");
-             
-            			// set dialog message
-            			alertDialogBuilder
-            				.setMessage(error)
-            				.setCancelable(false)
-            				.setPositiveButton("Yes", null);
-            				             
-            				// create alert dialog
-            				AlertDialog alertDialog = alertDialogBuilder.create();
-             
-            				// show it
-            				alertDialog.show();
-            	}
-            	finish();
+            	
             	return true;
             	
             case R.id.menu_cancel:
@@ -222,7 +211,7 @@ public class CreateSMS extends FragmentActivity{
             	intent = new Intent(this, Main.class);
                 //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
-                finish();
+                //finish();
             	return true;
             	
             default:
@@ -252,28 +241,70 @@ public class CreateSMS extends FragmentActivity{
     	    timestamp.getTime(), pendingIntent);
     }
     
-    private String repectCondition() {
-    	String erreur = null;
-		if(editTextContact.getText().toString().equals(""))
-			erreur =  "Vous n'avez pas choisi de contact";
-		else if(editTextSMS.getText().toString().equals(""))
-			erreur =  "Vous n'avez pas écrit de texte";
-		else if(checkBoxMap.isChecked() && editTextLocalisation.getText().toString().equals(""))
-			erreur =  "vous n'avez pas choisi une localisation";
+    private boolean repectCondition() {
+    	String error = null;
+    	AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+    	
+    	boolean test = true;
+    	
+    	
+    	error="Pour enregistrer le message vous devez : \n";
+    	
+    	if(editTextContact.getText().toString().equals("")){
+    		error+="Mettre au moins un contact\n";
+    		test=false;
+    	}
+    	
+    	if (!checkBoxMap.isChecked() && !checkBoxTime.isChecked()){
+    		error+="Donner une date et/ou un lieu d'envoie\n";
+    		test=false;
+    	}
+    	{
+	    	if(checkBoxMap.isChecked() && editTextLocalisation.getText().toString().equals("")){
+	    		error+="Remplir le lieu d'envoie\n";
+	    		test = false;
+	    	}
+	    	
+	    	if(checkBoxTime.isChecked()){
+				Timestamp timestamp = new Timestamp(fragmentDate.getYear()-1900,
+	    											fragmentDate.getMonth(),
+	    											fragmentDate.getDay(),
+	    											fragmentTime.getHour(),
+	    											fragmentTime.getMinute(),0,0);
+				final Calendar c = Calendar.getInstance();
+				if(c.getTimeInMillis() > timestamp.getTime()){
+					test=false;
+					error+="Donner une date future\n";
+				}	
+	    	}
+    	}
+    		
+    	if(editTextSMS.getText().toString().equals("")){
+    		error+="Ecrire un message\n";
+    		test=false;
+    	}
+    	
+    	
 		
-		else if(checkBoxTime.isChecked()){
-			Timestamp timestamp = new Timestamp(fragmentDate.getYear()-1900,
-    				fragmentDate.getMonth(),
-    				fragmentDate.getDay(),
-    				fragmentTime.getHour(),
-    				fragmentTime.getMinute(),0,0);
-			final Calendar c = Calendar.getInstance();
-			if(c.getTimeInMillis() > timestamp.getTime())
-				erreur =  "La date ou l'heure est inférieur a celle actuel";
-		}
-		else if (!checkBoxMap.isChecked() && !checkBoxTime.isChecked())
-			erreur =  "Vous devez choisir une date ou une localisation";
-		return erreur;
+    	if(!test){
+    		// set title
+    		alertDialogBuilder.setTitle("Informations incomplètes");
+
+    		// set dialog message
+    		alertDialogBuilder
+    			.setMessage(error)
+    			.setCancelable(false)
+    			.setPositiveButton("Ok", null);
+    			             
+    		// create alert dialog
+    		AlertDialog alertDialog = alertDialogBuilder.create();
+
+    		// show it
+    		alertDialog.show();
+    	}
+		
+    	
+		return test;
 	}
 
 	public void test(View view){
@@ -289,7 +320,6 @@ public class CreateSMS extends FragmentActivity{
     			if(checked){
     				buttonMap.setEnabled(true);
     				editTextLocalisation.setEnabled(true);
-    				//editTextLocalisation.setText("");
     			}
     			else{
     				buttonMap.setEnabled(false);
@@ -300,16 +330,12 @@ public class CreateSMS extends FragmentActivity{
     			if(checked){
     				buttonDate.setEnabled(true);
     				buttonTime.setEnabled(true);
-    				//buttonCalendrier.setEnabled(true);
     				fragmentDate.ModifierButton();
     				fragmentTime.ModifierButton();
     			}
     			else{
-    				//buttonCalendrier.setEnabled(false);
     				buttonDate.setEnabled(false);
     				buttonTime.setEnabled(false);
-    				//buttonDate.setText("JJ-MM-AAAA");
-    				//buttonTime.setText("HH:MM");
     			}
     	}
     }
