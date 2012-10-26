@@ -27,12 +27,13 @@
     <string name="mapKey">0bZmJZZKGv4XSXz9kTm1vQZSh-j9n-pDpHviChQ</string>
     <string name="title_activity_contact">Contact</string>
     <string name="stringcontact">contact</string>
-    <string name="time">HH:MM</string>
+    <string name="label_time1">HH:MM</string>
     <string name="title_activity_localisation">Localisation</string>
     <string name="rechercheMap">Recherche Map</string>
     <string name="service">Service</string>
     <string name="notification">Notification</string>
     <string name="aucunSMS">Aucun SMS enregistrer</string>
     <string name="title_activity_main_activitytt">MainActivitytt</string>
+    <string name="label_time2">JJ/MM/AAAA</string>
 
 </resources>

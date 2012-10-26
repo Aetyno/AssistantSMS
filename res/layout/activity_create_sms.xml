@@ -25,10 +25,11 @@
 
         <EditText
             android:id="@+id/editTextContact"
-            android:layout_width="wrap_content"
+            android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:ems="10" />
+            android:ems="10"
+            android:inputType="phone"/>
     </LinearLayout>
 
     <TextView
@@ -49,7 +50,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:onClick="onCheckboxClicked" />
-
+
         <Button
             android:id="@+id/picker_date"
             android:layout_width="wrap_content"
@@ -57,8 +58,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:onClick="showDatePickerDialog"
-            android:text="JJ-MM-AAAA" />
-
+            android:text="@string/label_time2" />
+
         <Button
             android:id="@+id/picker_time"
             android:layout_width="wrap_content"
@@ -66,12 +67,12 @@
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/picker_date"
             android:onClick="showTimePickerDialog"
-            android:text="hh:mm" />
+            android:text="@string/label_time1" />
 
     </RelativeLayout>
-
+
     <RelativeLayout
-        android:id="@+id/RelativeLayout1"
+        android:id="@+id/RelativeLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
@@ -99,7 +100,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/button_map"
-            android:layout_weight="1"
             android:ems="10"
             android:inputType="textPostalAddress" />
 
@@ -116,7 +116,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:text="" >
+        android:text="" 
+        android:inputType="text" >
 
         <requestFocus />
     </EditText>
