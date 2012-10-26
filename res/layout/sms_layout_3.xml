@@ -17,7 +17,8 @@
        <TextView 
             android:text="@string/destinataire" android:id="@+id/destinataire"
 			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content">
+			android:layout_height="wrap_content"
+			android:maxLines="1">
 		</TextView>
 
     </LinearLayout> 
@@ -35,7 +36,8 @@
        <TextView 
             android:text="@string/lieu" android:id="@+id/lieu"
 			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content">
+			android:layout_height="wrap_content"
+			android:maxLines="1">
 		</TextView>
 
     </LinearLayout> 
@@ -53,7 +55,8 @@
        <TextView 
             android:text="@string/sms" android:id="@+id/sms"
 			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content">
+			android:layout_height="wrap_content"
+			android:maxLines="1">
 		</TextView>
 
     </LinearLayout> 

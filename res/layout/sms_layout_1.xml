@@ -20,7 +20,8 @@
        <TextView 
             android:text="@string/destinataire" android:id="@+id/destinataire"
 			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content">
+			android:layout_height="wrap_content"
+			android:maxLines="1">
 		</TextView>
 
     </LinearLayout>
@@ -38,7 +39,8 @@
        <TextView 
             android:text="@string/date" android:id="@+id/date"
 			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content">
+			android:layout_height="wrap_content"
+			android:maxLines="1">
 		</TextView>
 
     </LinearLayout> 
@@ -56,7 +58,8 @@
        <TextView 
             android:text="@string/lieu" android:id="@+id/lieu"
 			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content">
+			android:layout_height="wrap_content"
+			android:maxLines="1">
 		</TextView>
 
     </LinearLayout> 
@@ -70,11 +73,14 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:text="@string/sms" />
+
+       <TextView
+           android:id="@+id/sms"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="@string/sms"
+           android:maxLines="1" >
 
-       <TextView 
-            android:text="@string/sms" android:id="@+id/sms"
-			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content">
 		</TextView>
 
     </LinearLayout> 		
