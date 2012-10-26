@@ -26,6 +26,7 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 @SuppressLint("NewApi")
 public class HistoryGeo extends MapActivity {
@@ -71,6 +72,8 @@ public class HistoryGeo extends MapActivity {
 		mc = mapView.getController();
 		mc.setCenter(location);
 		mc.setZoom(10);
+
+    	
    	}
     
     public void AjoutMarqueur(SMS sms){

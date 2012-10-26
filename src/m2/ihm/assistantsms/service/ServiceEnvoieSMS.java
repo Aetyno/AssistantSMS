@@ -18,6 +18,8 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
@@ -34,6 +36,8 @@ public class ServiceEnvoieSMS extends Service {
 	
 	@Override
 	public void onCreate(){
+
+	       Toast.makeText(this, "service", Toast.LENGTH_LONG).show();
 	}
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
@@ -58,13 +62,42 @@ public class ServiceEnvoieSMS extends Service {
         else if (typeenvoie.equals("localisation"))
         	envoieSMSLocalisation();
         
+        
         maBaseGestion.close();
 	  
 	 }
 	
 	private void envoieSMSLocalisation() {
 		// TODO Auto-generated method stub
-		
+
+		LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+    	Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+		for(SMS sms:listeSMS){
+			
+			Location smsLoc = new Location(sms.getLocalisation());
+			float distance = location.distanceTo(smsLoc);
+			if(distance < 1000){
+				String destinataire[] = sms.getDestinataire().split(";");
+				for(int i = 0; i < destinataire.length; i++){
+					sendSMS(sms.getDestinataire(), sms.getMessage());
+				Toast.makeText(getApplicationContext(), "envoie mess a "+sms.getDestinataire(), Toast.LENGTH_SHORT).show();
+				}
+			maBaseGestion.updateSMS(sms.getID(),
+										sms.getDestinataire(),
+										sms.getDate(),
+										sms.getLocalisation(),
+										sms.getMessage(),
+										1);
+				
+		        MaBaseSettingsGestion maBaseSettingsGestion= new MaBaseSettingsGestion(this);
+		        maBaseSettingsGestion.open();
+		    	if(maBaseSettingsGestion.isNotificationOn()){
+			        createNotify(sms);
+		        }
+		    	maBaseSettingsGestion.close();
+		    	
+			}
+		}
 	}
 	private void envoieSMSDate() {
 		// TODO Auto-generated method stub
