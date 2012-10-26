@@ -2,7 +2,6 @@ package m2.ihm.assistantsms;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Locale;
 
 import resources.SMS;
 import resources.ListItimizedOverlay;
@@ -12,7 +11,6 @@ import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
-import com.google.android.maps.MyLocationOverlay;
 import com.google.android.maps.Overlay;
 import com.google.android.maps.OverlayItem;
 
@@ -21,7 +19,6 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
-import android.location.Location;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;

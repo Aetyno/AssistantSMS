@@ -16,7 +16,6 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.view.Menu;
 import android.view.MotionEvent;

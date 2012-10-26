@@ -7,7 +7,7 @@
     <string name="menu_history">Historique</string>
     <string name="menu_history_geo">Historique geographique</string>
     <string name="menu_about">A propos</string>
-    <string name="menu_main">Manu Principal</string>
+    <string name="menu_main">Menu principal</string>
     <string name="title_activity_history">Historique</string>
     <string name="title_activity_history_geo">Historique géographique</string>
     <string name="title_activity_create_sms">Nouvel SMS</string>
@@ -35,5 +35,7 @@
     <string name="aucunSMS">Aucun SMS enregistrer</string>
     <string name="title_activity_main_activitytt">MainActivitytt</string>
     <string name="label_time2">JJ/MM/AAAA</string>
+    <string name="about_projet">Projet du master IHM 2012 de Toulouse</string>
+    <string name="about_etudiant">Réalisé par M. François et N. Barcacci</string>
 
 </resources>

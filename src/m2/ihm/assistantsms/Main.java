@@ -12,7 +12,6 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ListView;
 
 public class Main extends ListActivity {
 	private List<SMS> listeSMS;
