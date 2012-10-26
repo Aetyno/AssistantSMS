@@ -16,6 +16,7 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 public class History extends ListActivity {
 
@@ -80,5 +81,16 @@ public class History extends ListActivity {
             	return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+    
+    public void detail(View v){
+    	TextView tv = (TextView)v.findViewById(R.id.textView1);
+    	
+    	SmsDetail.setId(Integer.parseInt(tv.getText().toString()));
+    	
+    		
+    	Intent intent = new Intent(this, SmsDetail.class);
+        //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }

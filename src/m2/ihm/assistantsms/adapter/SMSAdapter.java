@@ -22,6 +22,14 @@ public class SMSAdapter extends BaseAdapter  {
 	
 	private LayoutInflater inflater;
 	
+	
+	private TextView destinataire = null;
+	private TextView date = null;
+	private TextView localisation = null;
+	private TextView sms = null;
+	private TextView smsID = null;
+	
+	
 	public SMSAdapter(Context context, List<SMS> aListP) {
 		  this.context = context;
 		  this.listSMS = aListP;
@@ -45,10 +53,7 @@ public class SMSAdapter extends BaseAdapter  {
 		// TODO Auto-generated method stub
 		LinearLayout layoutItem;
 		
-		TextView destinataire = null;
-		TextView date = null;
-		TextView localisation = null;
-		TextView sms = null;
+		
 		  
 		if( !listSMS.get(position).getLocalisation().equals("null") && listSMS.get(position).getDate()!= null){
 			layoutItem = (LinearLayout) inflater.inflate(R.layout.sms_layout_1, parent, false);
@@ -57,12 +62,15 @@ public class SMSAdapter extends BaseAdapter  {
 			date = (TextView)layoutItem.findViewById(R.id.date);
 			localisation = (TextView)layoutItem.findViewById(R.id.lieu);
 			sms = (TextView)layoutItem.findViewById(R.id.sms);
-			
+			smsID = (TextView)layoutItem.findViewById(R.id.textView1);
 			
 			destinataire.setText(listSMS.get(position).getDestinataire());
 			date.setText(listSMS.get(position).getDate().toString());
 			localisation.setText(listSMS.get(position).getLocalisation());
 			sms.setText(listSMS.get(position).getMessage());
+			smsID.setText(""+listSMS.get(position).getID());
+			smsID.setPadding(-100, -100, -100, -100);
+			
 			  
 		}
 		else if (listSMS.get(position).getDate() != null){
@@ -71,10 +79,13 @@ public class SMSAdapter extends BaseAdapter  {
 			destinataire = (TextView)layoutItem.findViewById(R.id.destinataire);
 			date = (TextView)layoutItem.findViewById(R.id.date);
 			sms = (TextView)layoutItem.findViewById(R.id.sms);
+			smsID = (TextView)layoutItem.findViewById(R.id.textView1);
 			
 			destinataire.setText(listSMS.get(position).getDestinataire());
 			date.setText(listSMS.get(position).getDate().toString());
 			sms.setText(listSMS.get(position).getMessage());
+			smsID.setText(""+listSMS.get(position).getID());
+			smsID.setPadding(-100, -100, -100, -100);
 		}
 		else{
 			layoutItem = (LinearLayout) inflater.inflate(R.layout.sms_layout_3, parent, false);
@@ -82,10 +93,13 @@ public class SMSAdapter extends BaseAdapter  {
 			destinataire = (TextView)layoutItem.findViewById(R.id.destinataire);
 			localisation = (TextView)layoutItem.findViewById(R.id.lieu);
 			sms = (TextView)layoutItem.findViewById(R.id.sms);
+			smsID = (TextView)layoutItem.findViewById(R.id.textView1);
 			
 			destinataire.setText(listSMS.get(position).getDestinataire());
 			localisation.setText(listSMS.get(position).getLocalisation());
 			sms.setText(listSMS.get(position).getMessage());
+			smsID.setText(""+listSMS.get(position).getID());
+			smsID.setPadding(-100, -100, -100, -100);
 		}
 		 
 		/*LinearLayout layoutItem;
