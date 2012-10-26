@@ -88,6 +88,8 @@ public class CreateSMS extends FragmentActivity{
 		fragmentDate = new DatePickerFragment(buttonDate);
     	fragmentTime.ModifierButton();
 		fragmentDate.ModifierButton();
+		
+		editTextContact.setText("");
     }
 	
 	
@@ -112,9 +114,9 @@ public class CreateSMS extends FragmentActivity{
                 int column = cursor.getColumnIndex(Phone.NUMBER);
                 String number = cursor.getString(column);
                 if(editTextContact.getText().equals(("")))
-                	editTextContact.setText(editTextContact.getText()+";"+number);
+                	editTextContact.setText(number + "; ");
                 else
-                	editTextContact.setText(number);
+                	editTextContact.setText(editTextContact.getText() + number + "; ");
             }
         }
     }
