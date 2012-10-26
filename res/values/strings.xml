@@ -32,7 +32,7 @@
     <string name="label_time2">JJ/MM/AAAA</string>
     <string name="about_projet">Projet du master IHM 2012 de Toulouse</string>
     <string name="about_etudiant">Réalisé par M. François et N. Barcacci</string>
-    <string name="title_activity_sms_detail">SmsDetail</string>
+    <string name="title_activity_sms_detail">Détails</string>
     <string name="sms_id">-1</string>
     <string name="activated">Actif</string>
     <string name="inactivated">Inactif</string>
