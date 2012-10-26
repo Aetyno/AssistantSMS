@@ -12,22 +12,25 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ListView;
+import android.widget.TextView;
 
 public class Main extends ListActivity {
 	private List<SMS> listeSMS;
+	private MaBaseSMSGestion maBaseGestion;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        MaBaseSMSGestion maBaseGestion = new MaBaseSMSGestion(this);
+        maBaseGestion = new MaBaseSMSGestion(this);
                 
         maBaseGestion.open();
         listeSMS = maBaseGestion.getAllSMSPrepared();
-        	maBaseGestion.close();
-            SMSAdapter adapter = new SMSAdapter(this, listeSMS);
-            setListAdapter(adapter);
+        maBaseGestion.close();
+        SMSAdapter adapter = new SMSAdapter(this, listeSMS);
+        setListAdapter(adapter);
         getActionBar().setDisplayHomeAsUpEnabled(true);
+        
+       
     }
 
     @Override
@@ -76,8 +79,13 @@ public class Main extends ListActivity {
         }
     }
     
-    public void clicSMS(View V){
-    	Intent intent = new Intent(this, ModifySMS.class);
+    public void detail(View v){
+    	TextView tv = (TextView)v.findViewById(R.id.textView1);
+    	
+    	SmsDetail.setId(Integer.parseInt(tv.getText().toString()));
+    	
+    		
+    	Intent intent = new Intent(this, SmsDetail.class);
         //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/LinearLayout2"
+    android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" 
-    android:onClick="clicSMS">
-	
-    
-     <LinearLayout 
+    android:onClick="detail"
+    android:orientation="vertical"
+    android:paddingBottom="10dip"
+    android:paddingTop="10dip" >
+
+    <LinearLayout 
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
@@ -16,12 +16,14 @@
 	        android:id="@+id/stringdestinataire"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:text="@string/destinataire" />
+	        android:text="@string/destinataire" 
+	        android:textAppearance="?android:attr/textAppearanceMedium"/>
 
        <TextView 
             android:text="@string/destinataire" android:id="@+id/destinataire"
 			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content">
+			android:layout_height="wrap_content"
+			android:maxLines="1">
 		</TextView>
 
     </LinearLayout>
@@ -34,30 +36,14 @@
 	        android:id="@+id/stringDate"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:text="@string/date" />
+	        android:text="@string/date" 
+	        android:textAppearance="?android:attr/textAppearanceMedium"/>
 
        <TextView 
             android:text="@string/date" android:id="@+id/date"
 			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content">
-		</TextView>
-
-    </LinearLayout> 
-   
-    <LinearLayout 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <TextView
-	        android:id="@+id/stringLieu"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="@string/lieu" />
-
-       <TextView 
-            android:text="@string/lieu" android:id="@+id/lieu"
-			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content">
+			android:layout_height="wrap_content"
+			android:maxLines="1">
 		</TextView>
 
     </LinearLayout> 
@@ -70,13 +56,23 @@
 	        android:id="@+id/stringSMS"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:text="@string/sms" />
+	        android:text="@string/sms" 
+	        android:textAppearance="?android:attr/textAppearanceMedium"/>
 
        <TextView 
             android:text="@string/sms" android:id="@+id/sms"
 			android:layout_width="wrap_content" 
-			android:layout_height="wrap_content">
+			android:layout_height="wrap_content"
+			android:maxLines="1">
 		</TextView>
 
-    </LinearLayout> 		
+    </LinearLayout> 
+    
+     <TextView
+         android:id="@+id/textView1"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="@string/sms_id"
+         android:visibility="invisible" />
+
 </LinearLayout>

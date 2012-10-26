@@ -1,119 +1,159 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/LinearLayout2"
-    android:layout_width="match_parent"
+    android:layout_width="fill_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/receiver" />
-
-    <LinearLayout 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <ImageButton
-            android:id="@+id/button_contact"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/contact"
-            android:onClick="doLaunchContactPicker"
-            android:src="@drawable/ic_social_add_person"  />
-        <EditText
-            android:id="@+id/editTextContact"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            />
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/send" />
-
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="10dip"
+        android:paddingTop="10dip" >
 
-        <ImageButton
-            android:id="@+id/button_calendar"
+        <TextView
+            android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/calendar"
-            android:src="@drawable/ic_collections_go_to_today" />
+            android:text="@string/receiver"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <Button
-            android:id="@+id/picker_date" 
-    		android:layout_width="wrap_content" 
-		    android:layout_height="wrap_content"
-		    android:onClick="showDatePickerDialog"
-        	android:text="JJ-MM-AAAA" />
-        
-        <Button
-            android:id="@+id/picker_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" 
-		    android:onClick="showTimePickerDialog"
-        	android:text="hh:mm" />
-        
-        <CheckBox 
-            android:id="@+id/checkbox_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onCheckboxClicked"   />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <ImageButton
+                android:id="@+id/button_contact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/contact"
+                android:onClick="doLaunchContactPicker"
+                android:src="@drawable/ic_social_add_person" />
+
+            <EditText
+                android:id="@+id/editTextContact"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="phone" />
+        </LinearLayout>
 
     </LinearLayout>
-    
-    <LinearLayout 
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:background="#FF909090" />
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="10dip"
+        android:paddingTop="10dip" >
 
-
-        <ImageButton
-            android:id="@+id/button_map"
+        <TextView
+            android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/map"
-            android:onClick="acceslocalisation"
-            android:src="@drawable/ic_location_map" />
+            android:text="@string/send"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <RelativeLayout
+            android:id="@+id/RelativeLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <CheckBox
+                android:id="@+id/checkbox_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:onClick="onCheckboxClicked" />
+
+            <Button
+                android:id="@+id/picker_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:onClick="showDatePickerDialog"
+                android:text="@string/label_time2" />
+
+            <Button
+                android:id="@+id/picker_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/picker_date"
+                android:onClick="showTimePickerDialog"
+                android:text="@string/label_time1" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/RelativeLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <ImageButton
+                android:id="@+id/button_map"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:contentDescription="@string/map"
+                android:onClick="test"
+                android:src="@drawable/ic_location_map" />
+
+            <CheckBox
+                android:id="@+id/checkbox_map"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:onClick="onCheckboxClicked" />
+
+            <EditText
+                android:id="@+id/editTextLocalisation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toLeftOf="@+id/checkbox_map"
+                android:layout_toRightOf="@+id/button_map"
+                android:ems="10"
+                android:inputType="textPostalAddress" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:background="#FF909090" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="10dip" >
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/message"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+>>>>>>> branch 'master' of https://github.com/Aetyno/AssistantSMS.git
 
         <EditText
-            android:id="@+id/editTextLocalisation"
-            android:layout_width="wrap_content"
+            android:id="@+id/editTextSMS"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:ems="10"
-            android:inputType="textPostalAddress"
-            />
-        		<CheckBox 
-            android:id="@+id/checkbox_map"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onCheckboxClicked" />
+            android:inputType="textMultiLine|textAutoCorrect" />
 
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/message" />
-
-    <EditText
-        android:id="@+id/editTextSMS"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10" 
-        android:text=""  >
-
-        <requestFocus />
-    </EditText>
-
 </LinearLayout>

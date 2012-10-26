@@ -1,7 +1,6 @@
 package m2.ihm.assistantsms;
 
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.util.List;
 
 import resources.*;
@@ -17,7 +16,6 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;

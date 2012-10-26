@@ -9,10 +9,8 @@ import resources.SMS;
 import m2.ihm.assistantsms.CreateSMS;
 import m2.ihm.assistantsms.History;
 import m2.ihm.assistantsms.R;
-import m2.ihm.assistantsms.adapter.SMSAdapter;
 import m2.ihm.assistantsms.base_de_donnees.MaBaseSMSGestion;
 import m2.ihm.assistantsms.base_de_donnees.MaBaseSettingsGestion;
-import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -109,7 +107,7 @@ public class ServiceEnvoieSMS extends Service {
 
 		for(SMS sms:listeSMS){
 			if(sms.getDate().equals(time)){
-				String destinataire[] = sms.getDestinataire().split(";");
+				String destinataire[] = sms.getDestinataire().split(",");
 				for(int i = 0; i < destinataire.length; i++){
 					sendSMS(destinataire[i], sms.getMessage());
 				Toast.makeText(getApplicationContext(), "envoie mess a "+destinataire[i], Toast.LENGTH_SHORT).show();

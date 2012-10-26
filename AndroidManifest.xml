@@ -98,6 +98,24 @@
         </activity>
         <service android:name="m2.ihm.assistantsms.service.ServiceEnvoieSMS" />
 
+        <activity
+            android:name=".MainActivitytt"
+            android:label="@string/title_activity_main_activitytt" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".SmsDetail"
+            android:label="@string/title_activity_sms_detail" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
