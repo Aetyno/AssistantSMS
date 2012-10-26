@@ -1,7 +1,6 @@
 package m2.ihm.assistantsms;
 
 import m2.ihm.assistantsms.base_de_donnees.MaBaseSettingsGestion;
-import m2.ihm.assistantsms.service.ServiceEnvoieSMS;
 import android.os.Bundle;
 import android.annotation.SuppressLint;
 import android.app.Activity;

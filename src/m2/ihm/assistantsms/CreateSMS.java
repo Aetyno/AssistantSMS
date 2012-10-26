@@ -343,12 +343,12 @@ public class CreateSMS extends FragmentActivity{
     }
     public void showTimePickerDialog(View v) {
     	fragmentTime.show(getSupportFragmentManager(), "timePicker");
-    	showDialog(999);
+    	//showDialog(999);
     }
 
 	public void showDatePickerDialog(View v) {
 		fragmentDate.show(getSupportFragmentManager(), "datePicker");
-    	showDialog(998);
+    	//showDialog(998);
 	}
 	
 	
