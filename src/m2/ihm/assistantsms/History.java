@@ -47,6 +47,7 @@ public class History extends ListActivity {
     public void clicSMS(View view){
     	
     }
+    
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
     	Intent intent;

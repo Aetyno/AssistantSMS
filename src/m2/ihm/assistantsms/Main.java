@@ -28,8 +28,6 @@ public class Main extends ListActivity {
         maBaseGestion.close();
         SMSAdapter adapter = new SMSAdapter(this, listeSMS);
         setListAdapter(adapter);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        
        
     }
 
@@ -43,36 +41,31 @@ public class Main extends ListActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
     	Intent intent;
     	switch (item.getItemId()) {
-	    	case R.id.menu_refresh:
-	            onRestart();
-	            return true;
-          
             case R.id.menu_create_sms:
                 // app icon in action bar clicked; go home
                 intent = new Intent(this, CreateSMS.class);
-                //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
-                finish();
                 return true;
             case R.id.menu_history:
             	intent = new Intent(this, History.class);
+            	intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
-                finish();
             	return true;
             case R.id.menu_history_geo:
             	intent = new Intent(this, HistoryGeo.class);
+            	intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
-                finish();
             	return true;
             case R.id.menu_settings:
             	intent = new Intent(this, Setting.class);
+            	intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
-                finish();
             	return true;
             case R.id.menu_about:
             	intent = new Intent(this, About.class);
+            	intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
-                finish();
             	return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -86,7 +79,7 @@ public class Main extends ListActivity {
     	
     		
     	Intent intent = new Intent(this, SmsDetail.class);
-        //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    	intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
     

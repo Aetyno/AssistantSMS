@@ -1,7 +1,6 @@
 <resources>
 
     <string name="app_name">AssistantSMS</string>
-    <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Paramètres</string>
     <string name="title_activity_main">AssistantSMS</string>
     <string name="menu_history">Historique</string>
@@ -16,29 +15,28 @@
     <string name="title_activity_setting">Paramètre</string>
     <string name="receiver">Destinataire(s)</string>
     <string name="contact">Contact</string>
-    <string name="map">Carte</string>
-    <string name="calendar">Calendrier</string>
     <string name="message">Message</string>
-    <string name="send">Condition</string>
-    <string name="sms">texte: </string>
-    <string name="lieu">Ou: </string>
-    <string name="date">Quand: </string>
-    <string name="destinataire">A: </string>
+    <string name="send">Condition(s) d\'envoie</string>
+    <string name="sms">Message :  </string>
+    <string name="lieu">A :  </string>
+    <string name="date">Le :  </string>
     <string name="mapKey">0bZmJZZKGv4XSXz9kTm1vQZSh-j9n-pDpHviChQ</string>
     <string name="title_activity_contact">Contact</string>
     <string name="stringcontact">contact</string>
     <string name="label_time1">HH:MM</string>
     <string name="title_activity_localisation">Localisation</string>
     <string name="rechercheMap">Recherche Map</string>
-    <string name="service">Service</string>
+    <string name="service">Envoie de SMS</string>
     <string name="notification">Notification</string>
     <string name="aucunSMS">Aucun SMS enregistrer</string>
-    <string name="title_activity_main_activitytt">MainActivitytt</string>
     <string name="label_time2">JJ/MM/AAAA</string>
     <string name="about_projet">Projet du master IHM 2012 de Toulouse</string>
     <string name="about_etudiant">Réalisé par M. François et N. Barcacci</string>
     <string name="title_activity_sms_detail">SmsDetail</string>
-    <string name="sms_detail">-1</string>
     <string name="sms_id">-1</string>
+    <string name="activated">Actif</string>
+    <string name="inactivated">Inactif</string>
+    <string name="map">Carte</string>
+    <string name="receiver2">Destinataires(s) :</string>
 
 </resources>

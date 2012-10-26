@@ -4,7 +4,9 @@ import m2.ihm.assistantsms.base_de_donnees.MaBaseSMSGestion;
 import resources.SMS;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 public class SmsDetail extends Activity {
@@ -59,16 +61,30 @@ public class SmsDetail extends Activity {
         
         textView7.setText(sms.getMessage());
         
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+        
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_sms_detail, menu);
-        
-        
-        
-        
+
         return true;
+    }
+    
+    public boolean onOptionsItemSelected(MenuItem item) {
+    	Intent intent;
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                intent = new Intent(this, Main.class);
+                intent.addFlags(
+                        Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                        Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
     
     public static void setId(int _id){

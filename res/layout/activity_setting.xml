@@ -4,19 +4,37 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical" >
-
+
     <Switch
         android:id="@+id/switch1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:onClick="switchService"
-        android:text="@string/service" />
-
+        android:paddingBottom="10dip"
+        android:paddingTop="10dip"
+        android:text="@string/service"
+        android:textOff="@string/inactivated"
+        android:textOn="@string/activated" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:background="#FF909090" />
+
     <Switch
         android:id="@+id/switch2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="switchNotification"
-        android:text="@string/notification" />
+        android:paddingBottom="10dip"
+        android:paddingTop="10dip"
+        android:text="@string/notification"
+        android:textOff="@string/inactivated"
+        android:textOn="@string/activated" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:background="#FF909090" />
 
 </LinearLayout>

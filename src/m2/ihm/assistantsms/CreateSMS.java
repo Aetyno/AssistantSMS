@@ -1,18 +1,13 @@
 package m2.ihm.assistantsms;
 
-import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.Calendar;
-import java.util.List;
 
 import resources.DatePickerFragment;
 import resources.TimePickerFragment;
 import m2.ihm.assistantsms.base_de_donnees.MaBaseSMSGestion;
 import m2.ihm.assistantsms.service.ServiceEnvoieSMS;
 
-import android.location.Address;
-import android.location.Geocoder;
-import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
@@ -36,7 +31,7 @@ import android.widget.Toast;
 
 
 @SuppressLint("NewApi")
-public class CreateSMS extends FragmentActivity {
+public class CreateSMS extends FragmentActivity{
 	
 	private TimePickerFragment fragmentTime;
 	private DatePickerFragment fragmentDate;
@@ -53,20 +48,13 @@ public class CreateSMS extends FragmentActivity {
 	private EditText editTextContact = null;
 	private EditText editTextLocalisation = null;
 	private EditText editTextSMS = null;
+	
     private static final int CONTACT_PICKER_RESULT = 1001;  
+    
     final Context context = this;
 
 	private MaBaseSMSGestion  maBaseGestion= new MaBaseSMSGestion(this);
 	private AlarmManager alarmManager;
-	
-	private static final long POINT_RADIUS = 1000; // in Meters
-	private static final long PROX_ALERT_EXPIRATION = -1; 
-	
-	private LocationManager locationManager;
-	private Geocoder geocoder ;
-	double longitude;
-	double latitude;
-	
     
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -74,6 +62,7 @@ public class CreateSMS extends FragmentActivity {
         setContentView(R.layout.activity_create_sms);
         getActionBar().setDisplayHomeAsUpEnabled(true);
         init();
+        
         
     }
 
@@ -112,7 +101,7 @@ public class CreateSMS extends FragmentActivity {
 	
     public void doLaunchContactPicker(View view) {  
         Intent contactPickerIntent = new Intent(Intent.ACTION_PICK,  
-                Contacts.CONTENT_URI);  
+                								Contacts.CONTENT_URI);  
         contactPickerIntent.setType(Phone.CONTENT_TYPE);
         startActivityForResult(contactPickerIntent, CONTACT_PICKER_RESULT);  
     }  
@@ -137,6 +126,7 @@ public class CreateSMS extends FragmentActivity {
             }
         }
     }
+    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_create_sms, menu);
@@ -200,15 +190,19 @@ public class CreateSMS extends FragmentActivity {
 	            	
 	            	maBaseGestion.close();
 	            	
+	            	//((Model) Singleton.getModel()).addSMSListeSMS("Destinaire", new Date(), "localisation", "sms");
+	      
+	            	
 	            	toast = Toast.makeText(getApplicationContext(), "Message enregistré", Toast.LENGTH_SHORT);
 	            	toast.show();
 	            	
 	            	intent = new Intent(this, Main.class);
-	                //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 	                startActivity(intent);
 	                
 	                //finish();
             	}
+            	
             	return true;
             	
             case R.id.menu_cancel:
@@ -221,11 +215,16 @@ public class CreateSMS extends FragmentActivity {
                 startActivity(intent);
                 //finish();
             	return true;
-            
+            	
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
+    
+    private void addAlarmLocalisation(String localisation) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	private void addAlarmDate(Timestamp timestamp){
     	alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
@@ -243,7 +242,7 @@ public class CreateSMS extends FragmentActivity {
     	  alarmManager.set(AlarmManager.RTC_WAKEUP,
     	    timestamp.getTime(), pendingIntent);
     }
-
+    
     private boolean repectCondition() {
     	String error = null;
     	AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
@@ -310,9 +309,8 @@ public class CreateSMS extends FragmentActivity {
 		return test;
 	}
 
-	public void acceslocalisation(View view){
+	public void test(View view){
     	Intent intent = new Intent(this, Localisation.class);
-    	
         //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
@@ -352,42 +350,6 @@ public class CreateSMS extends FragmentActivity {
 		fragmentDate.show(getSupportFragmentManager(), "datePicker");
     	showDialog(998);
 	}
-
-    
-    private void addAlarmLocalisation(String localisation) {
-    	geocoder = new Geocoder(this);
-    	List<Address> listadress;
-    	try {
-			 listadress = geocoder.getFromLocationName(localisation, 1);
-			 if(listadress.size() > 0){
-					longitude = listadress.get(0).getLongitude();
-					latitude = listadress.get(0).getLatitude();
-			        Toast.makeText(getApplicationContext(), "longitude "+longitude+ " latitude "+latitude, Toast.LENGTH_LONG).show();
-					addProximityAlert(latitude, longitude);
-				}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-       Toast.makeText(getApplicationContext(), "alarm localisation", Toast.LENGTH_LONG).show();
-       
-	}
-	private void addProximityAlert(double latitude, double longitude) {
-		
-        Intent intent = new Intent(this, ServiceEnvoieSMS.class);
-  	    Bundle n = new Bundle();
-  	    n.putString("Key", "localisation");
-  	    intent.putExtras(n);
-        PendingIntent proximityIntent = PendingIntent.getService(this, -1,
-        	    intent, 0);
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
-        locationManager.addProximityAlert(
-    		latitude, // the latitude of the central point of the alert region
-    		longitude, // the longitude of the central point of the alert region
-    		POINT_RADIUS, // the radius of the central point of the alert region, in meters
-    		PROX_ALERT_EXPIRATION, // time for this proximity alert, in milliseconds, or -1 to indicate no expiration 
-    		proximityIntent // will be used to generate an Intent to fire when entry to or exit from the alert region is detected
-       );
-	}
+	
 	
 }

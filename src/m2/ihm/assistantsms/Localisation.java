@@ -16,16 +16,12 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.EditText;
-import android.widget.Toast;
 
 
 public class Localisation extends MapActivity implements OnTouchListener {
@@ -53,9 +49,7 @@ public class Localisation extends MapActivity implements OnTouchListener {
         localisation = (EditText) findViewById(R.id.editTextLocalisationMap);
         Drawable drawable = this.getResources().getDrawable(R.drawable.ic_launcher);
 		itemizedoverlay = new ListItimizedOverlay(drawable,this);
-
-		mc = mapView.getController();
-        mc.setZoom(10);
+        
     }
 
     @Override
@@ -84,58 +78,7 @@ public class Localisation extends MapActivity implements OnTouchListener {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	 @Override
-	    public boolean onOptionsItemSelected(MenuItem item) {
-	        Intent intent;
-	        Toast toast;
-	    	
-	    	switch (item.getItemId()) {
-	            case android.R.id.home:
-	            	Intent parentActivityIntent = new Intent(this, CreateSMS.class);
-	                parentActivityIntent.addFlags(
-	                        Intent.FLAG_ACTIVITY_CLEAR_TOP |
-	                        Intent.FLAG_ACTIVITY_NEW_TASK);
-	                startActivity(parentActivityIntent);
-	                finish();
-	                return true;
-	                
-	            case R.id.menu_accept:
-	            	if( localisation.getText().toString().equals("")){
-	            		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-	          			alertDialogBuilder.setTitle("Erreur");
-	        			alertDialogBuilder
-	        				.setMessage("Vous n'avez pas de localisation")
-	        				.setCancelable(false)
-	        				.setPositiveButton("Yes", null);
-	        			AlertDialog alertDialog = alertDialogBuilder.create();
-	        			alertDialog.show();
-	            	}
-	            	else {
 
-	            		EditText localisationCreate = (EditText) findViewById(R.id.editTextLocalisation);
-	            		localisationCreate.setText(localisation.getText().toString());
-	            	}
-	            	intent = new Intent(this, CreateSMS.class);
-	                //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-	                startActivity(intent);
-	            	finish();
-	            	return true;
-	            	
-	            case R.id.menu_cancel:
-
-	            	toast = Toast.makeText(getApplicationContext(), "Annulation", Toast.LENGTH_SHORT);
-	            	toast.show();
-	            	
-	            	intent = new Intent(this, Main.class);
-	                //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-	                startActivity(intent);
-	                finish();
-	            	return true;
-	            
-	            default:
-	                return super.onOptionsItemSelected(item);
-	        }
-	    }
 	public boolean onTouch(View v, MotionEvent event) {
 		 if (event.getAction() == 1) {
 			 GeoPoint p = mapView.getProjection().fromPixels(

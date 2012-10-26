@@ -68,8 +68,6 @@ public class HistoryGeo extends MapActivity {
 		mc = mapView.getController();
 		mc.setCenter(location);
 		mc.setZoom(10);
-
-    	
    	}
     
     public void AjoutMarqueur(SMS sms){

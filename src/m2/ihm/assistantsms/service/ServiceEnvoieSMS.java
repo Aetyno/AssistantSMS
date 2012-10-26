@@ -16,8 +16,6 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
@@ -31,74 +29,50 @@ public class ServiceEnvoieSMS extends Service {
 	private MaBaseSMSGestion maBaseGestion;
 	public static int ID_NOTIFICATION = 1988;
 	private static int numMessages;
+	private MaBaseSettingsGestion maBaseSettingsGestion;
 	
 	@Override
 	public void onCreate(){
-
-	       Toast.makeText(this, "service", Toast.LENGTH_LONG).show();
 	}
+	
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 	    return super.onStartCommand(intent,flags,startId);
 	}
-	
 
 	@Override
 	 public void onStart(Intent intent, int startId) {
 	    // TODO Auto-generated method stub
 	    super.onStart(intent, startId);
+	    maBaseGestion = new MaBaseSMSGestion(this);
+	    maBaseSettingsGestion = new MaBaseSettingsGestion(this);
+	    
 	    Bundle bundle = intent.getExtras();
 	    intent.setClass( this , CreateSMS.class );
 	    String typeenvoie = "";
 	    if(bundle != null)
 	    	typeenvoie = (String) bundle.getString("Key");
 	    
-	    maBaseGestion = new MaBaseSMSGestion(this);
-        maBaseGestion.open();
-        if(typeenvoie.equals("date"))
-        	envoieSMSDate();
-        else if (typeenvoie.equals("localisation"))
-        	envoieSMSLocalisation();
-        
-        
-        maBaseGestion.close();
+	    maBaseSettingsGestion.open();
+	    if(maBaseSettingsGestion.isServiceOn()){
+	    	maBaseGestion.open();
+	        if(typeenvoie.equals("date"))
+	        	envoieSMSDate();
+	        else if (typeenvoie.equals("localisation"))
+	        	envoieSMSLocalisation();
+	        maBaseGestion.close();
+	    }
+	    maBaseSettingsGestion.close();
 	  
 	 }
 	
 	private void envoieSMSLocalisation() {
 		// TODO Auto-generated method stub
-
-		LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-    	Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-		for(SMS sms:listeSMS){
-			
-			Location smsLoc = new Location(sms.getLocalisation());
-			float distance = location.distanceTo(smsLoc);
-			if(distance < 1000){
-				String destinataire[] = sms.getDestinataire().split(";");
-				for(int i = 0; i < destinataire.length; i++){
-					sendSMS(sms.getDestinataire(), sms.getMessage());
-				Toast.makeText(getApplicationContext(), "envoie mess a "+sms.getDestinataire(), Toast.LENGTH_SHORT).show();
-				}
-			maBaseGestion.updateSMS(sms.getID(),
-										sms.getDestinataire(),
-										sms.getDate(),
-										sms.getLocalisation(),
-										sms.getMessage(),
-										1);
-				
-		        MaBaseSettingsGestion maBaseSettingsGestion= new MaBaseSettingsGestion(this);
-		        maBaseSettingsGestion.open();
-		    	if(maBaseSettingsGestion.isNotificationOn()){
-			        createNotify(sms);
-		        }
-		    	maBaseSettingsGestion.close();
-		    	
-			}
-		}
+		
 	}
 	private void envoieSMSDate() {
 		// TODO Auto-generated method stub
+	
 		Calendar cal = Calendar.getInstance();
 		cal.set(Calendar.SECOND, 0);
 		cal.set(Calendar.MILLISECOND, 0);
@@ -118,12 +92,10 @@ public class ServiceEnvoieSMS extends Service {
 										sms.getMessage(),
 										1);
 				
-		        MaBaseSettingsGestion maBaseSettingsGestion= new MaBaseSettingsGestion(this);
-		        maBaseSettingsGestion.open();
+		    
 		    	if(maBaseSettingsGestion.isNotificationOn()){
 			        createNotify(sms);
 		        }
-		    	maBaseSettingsGestion.close();
 		    	
 			}
 		}

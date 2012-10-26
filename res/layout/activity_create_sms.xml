@@ -146,7 +146,6 @@
             android:layout_height="wrap_content"
             android:text="@string/message"
             android:textAppearance="?android:attr/textAppearanceMedium" />
->>>>>>> branch 'master' of https://github.com/Aetyno/AssistantSMS.git
 
         <EditText
             android:id="@+id/editTextSMS"

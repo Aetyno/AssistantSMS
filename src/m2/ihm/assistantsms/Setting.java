@@ -15,7 +15,6 @@ import android.widget.Switch;
 public class Setting extends Activity {
 
 	private MaBaseSettingsGestion maBaseSettingsGestion;
-	Intent serviceSendSMS;
 	
 	private Switch switch1; 
 	private Switch switch2;
@@ -24,7 +23,6 @@ public class Setting extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
-        serviceSendSMS = new Intent(this, ServiceEnvoieSMS.class);
         
         maBaseSettingsGestion = new MaBaseSettingsGestion(this);
         
@@ -101,11 +99,9 @@ public class Setting extends Activity {
     	maBaseSettingsGestion.open();
     	if(switch1.isChecked()){
         	maBaseSettingsGestion.setService(true);
-        	startService(serviceSendSMS);
         }
         else{
         	maBaseSettingsGestion.setService(false);
-        	stopService(serviceSendSMS);
         }
     	maBaseSettingsGestion.close();
     }
